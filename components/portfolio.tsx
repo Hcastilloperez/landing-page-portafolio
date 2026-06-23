@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, ArrowUpRight, Code2, Zap, Database } from 'lucide-react';
+import { ExternalLink, ArrowUpRight, Code2, Zap } from 'lucide-react';
 
 export default function Portfolio() {
   const projects = [
@@ -27,17 +27,7 @@ export default function Portfolio() {
       color: '#ff6b35',
       icon: Zap,
     },
-    {
-      id: 3,
-      title: 'PLATFORM AI',
-      category: 'MVP',
-      description: 'Plataforma colaborativa para equipos con integración de inteligencia artificial para análisis y recomendaciones en tiempo real.',
-      features: ['Colaboración en tiempo real', 'IA analytics', 'Chat integrado', 'Integración API'],
-      tags: ['Next.js', 'Supabase', 'AI SDK', 'Socket.io'],
-      link: '#',
-      color: '#4a90ff',
-      icon: Database,
-    },
+
   ];
 
   const containerVariants = {

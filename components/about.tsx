@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Zap, Code2, Shield } from 'lucide-react';
 
 export default function About() {
   const skills = [
@@ -129,97 +127,7 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Athena Personal Project */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mt-20 pt-20 border-t border-[#00d48e]/20"
-        >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Athena Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative h-96 rounded-2xl overflow-hidden border border-[#00d48e]/30 group"
-              >
-                <Image
-                  src="/athena.png"
-                  alt="Athena - IA Personal Assistant"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#0f1117]/40 via-transparent to-[#00d48e]/10" />
-                
-                {/* Animated glow effect */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-[#00d48e]/0 via-[#00d48e]/20 to-[#00d48e]/0"
-                  animate={{ opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
-                
-                {/* Corner accent lights */}
-                <motion.div 
-                  className="absolute top-4 right-4 w-24 h-24 bg-[#00d48e] rounded-full blur-2xl opacity-0"
-                  animate={{ opacity: [0, 0.3, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                />
-                <motion.div 
-                  className="absolute bottom-4 left-4 w-32 h-32 bg-[#4a90ff] rounded-full blur-3xl opacity-0"
-                  animate={{ opacity: [0, 0.2, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
-                />
-              </motion.div>
-            </motion.div>
 
-            {/* Athena Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-5 h-5 text-[#ff6b35]" />
-                  <span className="text-[#ff6b35] text-sm font-mono uppercase tracking-widest">Proyecto Personal</span>
-                </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  Athena: Asistente IA Personal
-                </h3>
-              </div>
-
-              <p className="text-[#a0a8b8] leading-relaxed text-lg">
-                Una versión personal inspirada en Jarvis de Iron Man. Athena es mi laboratorio de experiencias en inteligencia artificial conversacional, automatización de procesos y control de sistemas inteligentes en el hogar.
-              </p>
-
-              <div className="grid grid-cols-3 gap-4">
-                <div className="p-4 rounded-lg bg-[#00d48e]/10 border border-[#00d48e]/20">
-                  <div className="text-[#00d48e] font-mono text-sm mb-1">AI Core</div>
-                  <p className="text-[#a0a8b8] text-xs">NLP avanzado</p>
-                </div>
-                <div className="p-4 rounded-lg bg-[#ff6b35]/10 border border-[#ff6b35]/20">
-                  <div className="text-[#ff6b35] font-mono text-sm mb-1">Automation</div>
-                  <p className="text-[#a0a8b8] text-xs">Task scheduling</p>
-                </div>
-                <div className="p-4 rounded-lg bg-[#4a90ff]/10 border border-[#4a90ff]/20">
-                  <div className="text-[#4a90ff] font-mono text-sm mb-1">Integration</div>
-                  <p className="text-[#a0a8b8] text-xs">Multi-device</p>
-                </div>
-              </div>
-
-              <p className="text-[#a0a8b8] italic">
-                &quot;Athena representa mi visión del futuro: tecnología que no solo es inteligente, sino también empática y accesible para todos.&quot;
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
