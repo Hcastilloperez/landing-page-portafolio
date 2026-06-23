@@ -144,15 +144,38 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative h-96 rounded-2xl overflow-hidden border border-[#00d48e]/30 group">
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative h-96 rounded-2xl overflow-hidden border border-[#00d48e]/30 group"
+              >
                 <Image
                   src="/athena.png"
                   alt="Athena - IA Personal Assistant"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#0f1117]/40 via-transparent to-[#00d48e]/10" />
-              </div>
+                
+                {/* Animated glow effect */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-[#00d48e]/0 via-[#00d48e]/20 to-[#00d48e]/0"
+                  animate={{ opacity: [0.3, 0.8, 0.3] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+                
+                {/* Corner accent lights */}
+                <motion.div 
+                  className="absolute top-4 right-4 w-24 h-24 bg-[#00d48e] rounded-full blur-2xl opacity-0"
+                  animate={{ opacity: [0, 0.3, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                />
+                <motion.div 
+                  className="absolute bottom-4 left-4 w-32 h-32 bg-[#4a90ff] rounded-full blur-3xl opacity-0"
+                  animate={{ opacity: [0, 0.2, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+                />
+              </motion.div>
             </motion.div>
 
             {/* Athena Content */}

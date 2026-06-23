@@ -19,7 +19,7 @@ export default function Navigation() {
         {/* Logo */}
         <a href="#" className="flex items-center gap-1">
           <span className="text-[#00d48e] font-mono text-lg">&lt;</span>
-          <span className="text-2xl font-bold grad-text">HC</span>
+          <span className="text-2xl font-bold text-[#00d48e]">HC</span>
           <span className="text-[#00d48e] font-mono text-lg">/&gt;</span>
         </a>
 

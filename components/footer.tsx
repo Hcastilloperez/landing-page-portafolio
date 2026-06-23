@@ -25,7 +25,7 @@ export default function Footer() {
           >
             <div className="flex items-center gap-1 mb-2">
               <span className="text-[#00d48e] font-mono text-lg">&lt;</span>
-              <span className="text-2xl font-bold grad-text">HC</span>
+              <span className="text-2xl font-bold text-[#00d48e]">HC</span>
               <span className="text-[#00d48e] font-mono text-lg">/&gt;</span>
             </div>
             <p className="text-[#a0a8b8] text-sm">
