@@ -70,7 +70,7 @@ export default function Portfolio() {
       <div className="absolute -top-40 right-0 w-[500px] h-[500px] bg-[#ff6b35]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 left-0 w-[500px] h-[500px] bg-[#00d48e]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
