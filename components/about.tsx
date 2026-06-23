@@ -11,26 +11,10 @@ export default function About() {
   ];
 
   const passions = [
-    { 
-      icon: '🤖', 
-      title: 'IA & Automatización', 
-      desc: 'Fascina construir sistemas inteligentes que automatizan procesos complejos' 
-    },
-    { 
-      icon: '🎨', 
-      title: 'Diseño Digital', 
-      desc: 'Crear interfaces bellas y funcionales que impacten la experiencia del usuario' 
-    },
-    { 
-      icon: '🚀', 
-      title: 'Innovación Tech', 
-      desc: 'Explorar nuevas tecnologías y aplicarlas para resolver problemas reales' 
-    },
-    { 
-      icon: '🔒', 
-      title: 'Seguridad', 
-      desc: 'Desarrollar soluciones seguras y confiables para proteger datos' 
-    },
+    'Inteligencia Artificial',
+    'Arquitectura de Sistemas',
+    'Diseño Digital',
+    'Seguridad'
   ];
 
   return (
@@ -102,26 +86,22 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Passions */}
+        {/* Passions - Minimal */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-20"
         >
-          <h3 className="text-2xl font-bold text-white mb-8">Mis Fascinaciones</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="flex flex-wrap gap-3">
             {passions.map((passion, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="p-6 rounded-xl border border-[#00d48e]/20 bg-[#16213e]/50 backdrop-blur hover:border-[#00d48e]/50 hover:bg-[#16213e]/80 transition-all group"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="px-4 py-2 rounded-full border border-[#00d48e]/30 bg-[#00d48e]/5 text-[#a0a8b8] text-sm hover:border-[#00d48e]/60 hover:bg-[#00d48e]/15 transition-all"
               >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{passion.icon}</div>
-                <h4 className="font-bold text-white mb-2">{passion.title}</h4>
-                <p className="text-sm text-[#a0a8b8]">{passion.desc}</p>
+                {passion}
               </motion.div>
             ))}
           </div>
