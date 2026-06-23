@@ -36,9 +36,9 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-4">
             <span className="text-[#00d48e] font-mono text-sm">03</span>
             <div className="h-px w-8 bg-gradient-to-r from-[#00d48e] to-transparent" />
             <span className="text-[#a0a8b8] text-sm uppercase tracking-widest">Contacto</span>
@@ -46,7 +46,7 @@ export default function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Hablemos
           </h2>
-          <p className="text-lg text-[#a0a8b8] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-[#a0a8b8] leading-relaxed">
             ¿Tienes un proyecto en mente? ¿Una idea que quieres discutir? Me encantaría escuchar tu visión y explorar cómo puedo ayudarte a hacerla realidad.
           </p>
         </motion.div>
