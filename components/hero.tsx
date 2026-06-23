@@ -49,7 +49,7 @@ export default function Hero() {
           className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
         >
           <span className="text-white">Innovación mediante</span>
-          <span className="block grad-text">Tecnología & Creatividad</span>
+          <span className="block text-[#00d48e]">Tecnología & Creatividad</span>
         </motion.h1>
 
         {/* Subtitle */}
