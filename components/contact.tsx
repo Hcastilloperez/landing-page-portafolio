@@ -49,7 +49,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl"
+          className="max-w-2xl mx-auto"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
