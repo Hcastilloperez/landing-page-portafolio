@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, ArrowUpRight, Code2, Zap } from 'lucide-react';
+import Image from 'next/image';
+import { ExternalLink, ArrowUpRight, Code2, Zap, Sparkles } from 'lucide-react';
 
 export default function Portfolio() {
   const projects = [
@@ -9,25 +10,35 @@ export default function Portfolio() {
       id: 1,
       title: 'BARBER CONTROL',
       category: 'SaaS',
-      description: 'Sistema integral para barberías que automatiza el flujo de datos: gestión de clientes, barberos, reservas de citas y dashboard con KPIs.',
-      features: ['Gestión de clientes', 'Sistema de reservas', 'Pagos automáticos', 'Dashboard analytics'],
+      description: 'Sistema integral para barberías que automatiza gestión de clientes, barberos, reservas y KPIs.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
       link: 'https://barbercontrol.hectorcastillo.net/',
       color: '#00d48e',
       icon: Code2,
+      isPersonal: false,
     },
     {
       id: 2,
       title: 'SOTER',
       category: 'Enterprise',
-      description: 'Plataforma de gestión de seguridad empresarial enfocada en instalaciones, esquemas de seguridad y análisis de riesgos con agente IA.',
-      features: ['Análisis de riesgos', 'Esquemas de seguridad', 'Monitoreo 24/7', 'Agente IA'],
+      description: 'Plataforma de seguridad empresarial con análisis de riesgos y agente IA integrado.',
       tags: ['Next.js', 'AI SDK', 'PostgreSQL', 'TypeScript'],
       link: 'https://soter.hectorcastillo.net',
       color: '#ff6b35',
       icon: Zap,
+      isPersonal: false,
     },
-
+    {
+      id: 3,
+      title: 'ATHENA',
+      category: 'IA Personal',
+      description: 'Asistente IA personal inspirado en Jarvis de Iron Man. Laboratorio de experiencias en IA conversacional y automatización.',
+      tags: ['AI', 'NLP', 'Automation', 'Integration'],
+      image: '/athena.png',
+      color: '#4a90ff',
+      icon: Sparkles,
+      isPersonal: true,
+    },
   ];
 
   const containerVariants = {
@@ -35,8 +46,8 @@ export default function Portfolio() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
@@ -46,21 +57,16 @@ export default function Portfolio() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: 'easeOut' },
     },
   };
 
   return (
     <section id="portfolio" className="py-32 relative overflow-hidden">
-      {/* Background gradient section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00d48e]/3 to-transparent pointer-events-none" />
-      
-      {/* Large background elements */}
-      <div className="absolute -top-40 right-0 w-[600px] h-[600px] bg-[#ff6b35]/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 left-0 w-[500px] h-[500px] bg-[#00d48e]/8 rounded-full blur-3xl pointer-events-none" />
-      
-      {/* Vertical accent line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#00d48e]/20 to-transparent pointer-events-none transform -translate-x-1/2" />
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00d48e]/2 to-transparent pointer-events-none" />
+      <div className="absolute -top-40 right-0 w-[500px] h-[500px] bg-[#ff6b35]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 left-0 w-[500px] h-[500px] bg-[#00d48e]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -68,7 +74,7 @@ export default function Portfolio() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-20"
+          className="mb-16"
         >
           <div className="flex items-center gap-3 mb-4">
             <span className="text-[#00d48e] font-mono text-sm">02</span>
@@ -83,212 +89,135 @@ export default function Portfolio() {
           >
             Proyectos que <span className="text-[#00d48e]">Generan Impacto</span>
           </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-lg text-[#a0a8b8] max-w-3xl leading-relaxed"
-          >
-            Desarrollé soluciones escalables y orientadas al usuario, combinando arquitectura robusta con experiencias intuitivas. Cada proyecto refleja atención al detalle y compromiso con la calidad.
-          </motion.p>
         </motion.div>
 
-        {/* Projects */}
+        {/* Projects Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="space-y-20"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {projects.map((project, index) => {
+          {projects.map((project) => {
             const IconComponent = project.icon;
             return (
               <motion.div
                 key={project.id}
                 variants={itemVariants}
-                className="group relative"
+                className="group h-full"
               >
-                {/* Project Number */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="flex-shrink-0">
-                    <div className="text-6xl font-bold" style={{ color: `${project.color}40` }}>
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                  </div>
-                  <div className="h-px flex-grow" style={{ backgroundColor: `${project.color}20` }} />
-                </div>
-
-                {/* Main Card */}
-                <div className="relative rounded-2xl overflow-hidden border transition-all duration-500" style={{
-                  borderColor: `${project.color}20`,
-                  background: `linear-gradient(135deg, rgb(22, 33, 62, 0.6) 0%, rgb(26, 26, 46, 0.5) 100%)`
-                }} onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = `${project.color}60`;
-                }} onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = `${project.color}20`;
-                }}>
-                  
-                  {/* Inner content */}
-                  <div className="relative z-10 p-8 lg:p-16">
-                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                      
-                      {/* Content Side */}
-                      <div className="lg:col-span-7">
-                        {/* Header */}
-                        <div className="mb-8">
-                          <div className="flex items-center gap-4 mb-4">
-                            <motion.div 
-                              className="p-3 rounded-lg"
-                              style={{ backgroundColor: `${project.color}15`, borderColor: `${project.color}30`, borderWidth: '1px' }}
-                              whileHover={{ scale: 1.1 }}
-                            >
-                              <IconComponent className="w-6 h-6" style={{ color: project.color }} />
-                            </motion.div>
-                            <span 
-                              className="text-xs font-bold px-3 py-1.5 rounded-full border"
-                              style={{
-                                borderColor: `${project.color}50`,
-                                backgroundColor: `${project.color}10`,
-                                color: project.color,
-                              }}
-                            >
-                              {project.category}
-                            </span>
-                          </div>
-                          <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
-                            {project.title}
-                          </h3>
-                          <div className="h-1.5 w-20 rounded-full" style={{ backgroundColor: project.color }} />
-                        </div>
-
-                        {/* Description */}
-                        <p className="text-[#a0a8b8] mb-10 leading-relaxed text-lg font-light">
-                          {project.description}
-                        </p>
-
-                        {/* Features */}
-                        <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                          {project.features.map((feature, i) => (
-                            <motion.div 
-                              key={i} 
-                              className="flex items-start gap-3"
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.1 * i }}
-                            >
-                              <motion.div 
-                                className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                                style={{ backgroundColor: project.color }}
-                                animate={{ scale: [1, 1.2, 1] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                              />
-                              <span className="text-[#a0a8b8]">{feature}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-
-                        {/* Tech Stack */}
-                        <div className="flex flex-wrap gap-2 pt-8 border-t border-[#00d48e]/10">
-                          {project.tags.map((tag, i) => (
-                            <motion.span 
-                              key={i} 
-                              className="text-xs px-3 py-2 rounded-full bg-[#3a4556]/30 text-[#a0a8b8] border border-[#00d48e]/10 hover:border-[#00d48e]/40 transition-colors cursor-default"
-                              whileHover={{ y: -2 }}
-                            >
-                              {tag}
-                            </motion.span>
-                          ))}
-                        </div>
-
-                        {/* CTA */}
-                        {project.link !== '#' && (
-                          <motion.a 
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg border transition-all duration-300"
-                            style={{
-                              borderColor: `${project.color}50`,
-                              backgroundColor: `${project.color}10`,
-                              color: project.color,
-                            }}
-                            whileHover={{ 
-                              backgroundColor: `${project.color}20`,
-                              transform: 'translateX(4px)'
-                            }}
-                          >
-                            <span className="font-semibold">Ver Proyecto</span>
-                            <ArrowUpRight className="w-4 h-4" />
-                          </motion.a>
-                        )}
-                      </div>
-
-                      {/* Stats/Info Side */}
-                      <div className="lg:col-span-5 hidden lg:block">
-                        <motion.div 
-                          className="space-y-6"
-                          initial={{ opacity: 0, x: 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.3 }}
-                        >
-                          {/* Visual indicator */}
-                          <div className="relative h-64 rounded-xl border border-[#00d48e]/20 overflow-hidden bg-[#0f1117]/50 shadow-lg" style={{
-                            borderColor: `${project.color}30`,
-                            boxShadow: `0 20px 60px ${project.color}15`
-                          }}>
-                            <div 
-                              className="absolute inset-0 opacity-30"
-                              style={{
-                                background: `linear-gradient(135deg, ${project.color}20 0%, transparent 100%)`
-                              }}
-                            />
-                            <motion.div 
-                              className="absolute inset-0 flex items-center justify-center"
-                              animate={{ y: [0, -10, 0] }}
-                              transition={{ duration: 4, repeat: Infinity }}
-                            >
-                              <div 
-                                className="w-20 h-20 rounded-lg flex items-center justify-center"
-                                style={{ 
-                                  backgroundColor: `${project.color}15`,
-                                  borderColor: `${project.color}30`,
-                                  borderWidth: '2px'
-                                }}
-                              >
-                                <IconComponent className="w-10 h-10" style={{ color: project.color }} />
-                              </div>
-                            </motion.div>
-                          </div>
-
-                          {/* Quick info */}
-                          <div className="grid grid-cols-2 gap-4">
-                            <motion.div 
-                              className="p-4 rounded-lg border border-[#00d48e]/10 bg-[#16213e]/50"
-                              whileHover={{ borderColor: project.color, borderWidth: '2px' }}
-                            >
-                              <span className="text-xs text-[#a0a8b8] uppercase tracking-widest block mb-1">Status</span>
-                              <span className="text-lg font-bold text-white">{project.category}</span>
-                            </motion.div>
-                            <motion.div 
-                              className="p-4 rounded-lg border border-[#00d48e]/10 bg-[#16213e]/50"
-                              whileHover={{ borderColor: project.color, borderWidth: '2px' }}
-                            >
-                              <span className="text-xs text-[#a0a8b8] uppercase tracking-widest block mb-1">Tech</span>
-                              <span className="text-lg font-bold text-white">{project.tags.length}</span>
-                            </motion.div>
-                          </div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Hover glow effect */}
+                <div 
+                  className="relative h-full rounded-xl overflow-hidden border transition-all duration-500 p-6 flex flex-col backdrop-blur-sm hover:border-opacity-100"
+                  style={{
+                    borderColor: `${project.color}30`,
+                    backgroundColor: 'rgba(16, 17, 23, 0.4)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `${project.color}80`;
+                    e.currentTarget.style.backgroundColor = 'rgba(16, 17, 23, 0.7)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = `${project.color}30`;
+                    e.currentTarget.style.backgroundColor = 'rgba(16, 17, 23, 0.4)';
+                  }}
+                >
+                  {/* Icon */}
                   <motion.div 
-                    className="absolute top-0 right-0 w-96 h-96 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-full blur-3xl"
+                    className="mb-4 inline-block p-2.5 rounded-lg"
                     style={{ 
-                      background: `radial-gradient(circle, ${project.color}20 0%, transparent 70%)`,
-                      transform: 'translate(50%, -50%)'
+                      backgroundColor: `${project.color}15`,
+                      borderColor: `${project.color}30`,
+                      borderWidth: '1px'
+                    }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  >
+                    <IconComponent className="w-5 h-5" style={{ color: project.color }} />
+                  </motion.div>
+
+                  {/* Badge */}
+                  {project.isPersonal && (
+                    <motion.span 
+                      className="text-xs font-bold px-2.5 py-1 rounded-full border mb-3 inline-block"
+                      style={{
+                        borderColor: `${project.color}60`,
+                        backgroundColor: `${project.color}15`,
+                        color: project.color,
+                      }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      Proyecto Personal
+                    </motion.span>
+                  )}
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {project.title}
+                  </h3>
+
+                  {/* Category */}
+                  <p className="text-xs uppercase tracking-widest text-[#a0a8b8] mb-4">
+                    {project.category}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-sm text-[#a0a8b8] mb-6 flex-grow leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Image for Athena */}
+                  {project.image && (
+                    <motion.div 
+                      className="relative h-40 rounded-lg overflow-hidden mb-6 border"
+                      style={{ borderColor: `${project.color}30` }}
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#0f1117]/40" />
+                    </motion.div>
+                  )}
+
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b border-[#00d48e]/10">
+                    {project.tags.map((tag, i) => (
+                      <motion.span 
+                        key={i} 
+                        className="text-xs px-2 py-1 rounded bg-[#3a4556]/40 text-[#a0a8b8] border border-[#00d48e]/10 hover:border-[#00d48e]/40 transition-colors"
+                        whileHover={{ y: -1 }}
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  {!project.isPersonal && project.link && (
+                    <motion.a 
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300"
+                      style={{ color: project.color }}
+                      whileHover={{ x: 4 }}
+                    >
+                      <span>Ver proyecto</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </motion.a>
+                  )}
+
+                  {/* Glow effect on hover */}
+                  <motion.div 
+                    className="absolute top-0 right-0 w-40 h-40 opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none rounded-full blur-2xl"
+                    style={{ 
+                      background: `radial-gradient(circle, ${project.color}40 0%, transparent 70%)`,
+                      transform: 'translate(30%, -30%)'
                     }}
                   />
                 </div>
@@ -301,7 +230,7 @@ export default function Portfolio() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.5 }}
           className="mt-20 text-center"
         >
           <p className="text-[#a0a8b8] mb-6">¿Tienes un proyecto en mente?</p>
