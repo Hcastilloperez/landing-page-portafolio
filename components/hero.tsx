@@ -48,8 +48,8 @@ export default function Hero() {
           transition={{ delay: 0.3 }}
           className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
         >
-          <span className="text-white">Innovación mediante</span>
-          <span className="block text-[#00d48e]">Tecnología & Creatividad</span>
+          <span className="text-[#00d48e]">Código</span>
+          <span className="block text-white">con propósito</span>
         </motion.h1>
 
         {/* Subtitle */}
