@@ -52,9 +52,15 @@ export default function Portfolio() {
 
   return (
     <section id="portfolio" className="py-32 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#ff6b35]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00d48e]/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Background gradient section */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00d48e]/3 to-transparent pointer-events-none" />
+      
+      {/* Large background elements */}
+      <div className="absolute -top-40 right-0 w-[600px] h-[600px] bg-[#ff6b35]/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 left-0 w-[500px] h-[500px] bg-[#00d48e]/8 rounded-full blur-3xl pointer-events-none" />
+      
+      {/* Vertical accent line */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#00d48e]/20 to-transparent pointer-events-none transform -translate-x-1/2" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -93,7 +99,7 @@ export default function Portfolio() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="space-y-12"
+          className="space-y-20"
         >
           {projects.map((project, index) => {
             const IconComponent = project.icon;
@@ -103,11 +109,28 @@ export default function Portfolio() {
                 variants={itemVariants}
                 className="group relative"
               >
+                {/* Project Number */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex-shrink-0">
+                    <div className="text-6xl font-bold" style={{ color: `${project.color}40` }}>
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                  </div>
+                  <div className="h-px flex-grow" style={{ backgroundColor: `${project.color}20` }} />
+                </div>
+
                 {/* Main Card */}
-                <div className="relative rounded-2xl overflow-hidden border border-[#00d48e]/10 bg-gradient-to-br from-[#16213e]/50 to-[#1a1a2e]/50 backdrop-blur-md hover:border-[#00d48e]/40 transition-all duration-500">
+                <div className="relative rounded-2xl overflow-hidden border transition-all duration-500" style={{
+                  borderColor: `${project.color}20`,
+                  background: `linear-gradient(135deg, rgb(22, 33, 62, 0.6) 0%, rgb(26, 26, 46, 0.5) 100%)`
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = `${project.color}60`;
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = `${project.color}20`;
+                }}>
                   
                   {/* Inner content */}
-                  <div className="relative z-10 p-8 lg:p-12">
+                  <div className="relative z-10 p-8 lg:p-16">
                     <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                       
                       {/* Content Side */}
@@ -133,14 +156,14 @@ export default function Portfolio() {
                               {project.category}
                             </span>
                           </div>
-                          <h3 className="text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
+                          <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
                             {project.title}
                           </h3>
-                          <div className="h-1 w-16 rounded-full" style={{ backgroundColor: project.color }} />
+                          <div className="h-1.5 w-20 rounded-full" style={{ backgroundColor: project.color }} />
                         </div>
 
                         {/* Description */}
-                        <p className="text-[#a0a8b8] mb-8 leading-relaxed text-lg">
+                        <p className="text-[#a0a8b8] mb-10 leading-relaxed text-lg font-light">
                           {project.description}
                         </p>
 
@@ -210,7 +233,10 @@ export default function Portfolio() {
                           transition={{ delay: 0.3 }}
                         >
                           {/* Visual indicator */}
-                          <div className="relative h-48 rounded-xl border border-[#00d48e]/20 overflow-hidden bg-[#0f1117]/50">
+                          <div className="relative h-64 rounded-xl border border-[#00d48e]/20 overflow-hidden bg-[#0f1117]/50 shadow-lg" style={{
+                            borderColor: `${project.color}30`,
+                            boxShadow: `0 20px 60px ${project.color}15`
+                          }}>
                             <div 
                               className="absolute inset-0 opacity-30"
                               style={{
