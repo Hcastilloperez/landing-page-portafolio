@@ -39,7 +39,7 @@ export default function Contact() {
           className="mb-16 text-center"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-[#00d48e] font-mono text-sm">04</span>
+            <span className="text-[#00d48e] font-mono text-sm">03</span>
             <div className="h-px w-8 bg-gradient-to-r from-[#00d48e] to-transparent" />
             <span className="text-[#a0a8b8] text-sm uppercase tracking-widest">Contacto</span>
           </div>
