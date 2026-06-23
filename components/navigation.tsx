@@ -17,8 +17,10 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0f1117]/90 border-b border-[#00d48e]/10">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="text-2xl font-bold grad-text">
-          HC
+        <a href="#" className="flex items-center gap-1">
+          <span className="text-[#00d48e] font-mono text-lg">&lt;</span>
+          <span className="text-2xl font-bold grad-text">HC</span>
+          <span className="text-[#00d48e] font-mono text-lg">/&gt;</span>
         </a>
 
         {/* Desktop Menu */}

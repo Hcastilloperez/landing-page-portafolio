@@ -23,7 +23,11 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="text-2xl font-bold grad-text mb-2">HC</div>
+            <div className="flex items-center gap-1 mb-2">
+              <span className="text-[#00d48e] font-mono text-lg">&lt;</span>
+              <span className="text-2xl font-bold grad-text">HC</span>
+              <span className="text-[#00d48e] font-mono text-lg">/&gt;</span>
+            </div>
             <p className="text-[#a0a8b8] text-sm">
               Ingeniero de Sistemas & Desarrollador Full Stack
             </p>
