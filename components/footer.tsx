@@ -14,7 +14,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#05050a] border-t border-[#00e5ff]/10">
+    <footer className="border-t border-[#00d48e]/10">
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
@@ -24,7 +24,7 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
           >
             <div className="text-2xl font-bold grad-text mb-2">HC</div>
-            <p className="text-[#c8c8d8] text-sm">
+            <p className="text-[#a0a8b8] text-sm">
               Ingeniero de Sistemas & Desarrollador Full Stack
             </p>
           </motion.div>
@@ -37,9 +37,9 @@ export default function Footer() {
           >
             <h4 className="text-white font-bold mb-4">Enlaces</h4>
             <ul className="space-y-2">
-              <li><a href="#about" className="text-[#c8c8d8] hover:text-[#00e5ff] transition-colors text-sm">Sobre Mí</a></li>
-              <li><a href="#portfolio" className="text-[#c8c8d8] hover:text-[#00e5ff] transition-colors text-sm">Portafolio</a></li>
-              <li><a href="#contact" className="text-[#c8c8d8] hover:text-[#00e5ff] transition-colors text-sm">Contacto</a></li>
+              <li><a href="#about" className="text-[#a0a8b8] hover:text-[#00d48e] transition-colors text-sm">Sobre Mí</a></li>
+              <li><a href="#portfolio" className="text-[#a0a8b8] hover:text-[#00d48e] transition-colors text-sm">Portafolio</a></li>
+              <li><a href="#contact" className="text-[#a0a8b8] hover:text-[#00d48e] transition-colors text-sm">Contacto</a></li>
             </ul>
           </motion.div>
 
@@ -59,10 +59,10 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg border border-[#00e5ff]/20 hover:border-[#00e5ff]/50 hover:bg-[#10101a] transition-all"
+                    className="p-2 rounded-lg border border-[#00d48e]/20 hover:border-[#00d48e]/50 hover:bg-[#16213e]/50 transition-all"
                     title={social.label}
                   >
-                    <Icon className="w-4 h-4 text-[#c8c8d8] hover:text-[#00e5ff] transition-colors" />
+                    <Icon className="w-4 h-4 text-[#a0a8b8] hover:text-[#00d48e] transition-colors" />
                   </a>
                 );
               })}
@@ -71,16 +71,16 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[#00e5ff]/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-8 border-t border-[#00d48e]/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#686878] text-sm">
             © {currentYear} Héctor Castillo. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-4 text-sm">
-            <a href="mailto:hectorcastilloperez@gmail.com" className="text-[#686878] hover:text-[#00e5ff] transition-colors">
+            <a href="mailto:hectorcastilloperez@gmail.com" className="text-[#686878] hover:text-[#00d48e] transition-colors">
               hectorcastilloperez@gmail.com
             </a>
             <span className="text-[#686878]">•</span>
-            <a href="https://hectorcastillo.net" target="_blank" rel="noopener noreferrer" className="text-[#686878] hover:text-[#00e5ff] transition-colors">
+            <a href="https://hectorcastillo.net" target="_blank" rel="noopener noreferrer" className="text-[#686878] hover:text-[#00d48e] transition-colors">
               hectorcastillo.net
             </a>
           </div>

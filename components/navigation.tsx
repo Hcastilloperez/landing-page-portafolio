@@ -14,7 +14,7 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#05050a]/80 border-b border-[#00e5ff]/10">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0f1117]/90 border-b border-[#00d48e]/10">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="text-2xl font-bold grad-text">
@@ -27,17 +27,17 @@ export default function Navigation() {
             <a
               key={item.href}
               href={item.href}
-              className="relative text-[#c8c8d8] hover:text-white transition-colors group"
+              className="relative text-[#a0a8b8] hover:text-white transition-colors group"
             >
               {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00e5ff] to-[#c77dff] group-hover:w-full transition-all" />
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00d48e] to-[#ff6b35] group-hover:w-full transition-all" />
             </a>
           ))}
         </div>
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <a href="#contact" className="px-6 py-2 rounded-full bg-gradient-to-r from-[#00e5ff] to-[#00b8d4] text-[#05050a] font-semibold hover:shadow-lg hover:shadow-[#00e5ff]/50 transition-all">
+          <a href="#contact" className="px-6 py-2 rounded-full bg-gradient-to-r from-[#00d48e] to-[#00b570] text-[#0f1117] font-semibold hover:shadow-lg hover:shadow-[#00d48e]/40 transition-all">
             Contactar
           </a>
         </div>
@@ -57,7 +57,7 @@ export default function Navigation() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden border-t border-[#00e5ff]/10 bg-[#0a0a12]"
+          className="md:hidden border-t border-[#00d48e]/10 bg-[#16213e]/50"
         >
           <div className="px-4 py-4 space-y-3">
             {navItems.map((item) => (
@@ -65,7 +65,7 @@ export default function Navigation() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-2 text-[#c8c8d8] hover:text-[#00e5ff] hover:bg-[#10101a] rounded-lg transition-colors"
+                className="block px-4 py-2 text-[#a0a8b8] hover:text-[#00d48e] hover:bg-[#16213e] rounded-lg transition-colors"
               >
                 {item.label}
               </a>
@@ -73,7 +73,7 @@ export default function Navigation() {
             <a
               href="#contact"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 rounded-lg bg-gradient-to-r from-[#00e5ff] to-[#00b8d4] text-[#05050a] font-semibold text-center"
+              className="block px-4 py-2 rounded-lg bg-gradient-to-r from-[#00d48e] to-[#00b570] text-[#0f1117] font-semibold text-center"
             >
               Contactar
             </a>
