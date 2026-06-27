@@ -10,9 +10,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
+  title: 'Hector R. | Full Stack Developer',
   description: 'Created with v0',
-  generator: 'v0.app',
+  generator: 'Hector R. Portfolio',
   icons: {
     icon: [
       {
