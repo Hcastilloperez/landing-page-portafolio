@@ -10,19 +10,17 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Hector R. | Full Stack Developer',
-  description: 'Portfolio de Héctor Castillo - Full Stack Developer',
-  generator: 'Hector R. Portfolio',
+  title: 'Héctor Castillo | Full Stack Developer',
+  description: 'Desarrollador Full Stack especializado en sistemas escalables y soluciones innovadoras. Código con propósito.',
   icons: {
-    icon: '/icon.svg',
+    icon: '/icon.png',
   },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
+  colorScheme: 'dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f1117' },
   ],
 }
 
