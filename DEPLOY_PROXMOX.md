@@ -42,11 +42,13 @@ pnpm -v
 
 ```bash
 # Crear directorio para la app
-mkdir -p /var/www/landing-page
-cd /var/www/landing-page
+mkdir -p /var/www/hectorcastillo
+cd /var/www/hectorcastillo
 
 # Clonar (usar tu usuario si es diferente)
 git clone https://github.com/Hcastilloperez/landing-page-portafolio.git .
+
+mv landing-page-portafolio landing-page
 
 # Instalar dependencias
 pnpm install
@@ -113,6 +115,7 @@ ln -s /etc/nginx/sites-available/landing-page /etc/nginx/sites-enabled/
 nginx -t
 
 # Recargar Nginx
+pm2 restart landing-page
 systemctl reload nginx
 ```
 

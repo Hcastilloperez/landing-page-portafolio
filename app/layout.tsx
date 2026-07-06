@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'Héctor Castillo | Full Stack Developer',
   description: 'Desarrollador Full Stack especializado en sistemas escalables y soluciones innovadoras. Código con propósito.',
   icons: {
-    icon: '/icon.png',
+    icon: '/icon.svg',
   },
 }
 
