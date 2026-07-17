@@ -1,19 +1,27 @@
 import Navigation from '@/components/navigation';
 import Hero from '@/components/hero';
 import About from '@/components/about';
+import Services from '@/components/services';
+import Process from '@/components/process';
 import Portfolio from '@/components/portfolio';
+import FAQ from '@/components/faq';
 import Contact from '@/components/contact';
 import Footer from '@/components/footer';
 
 export default function Page() {
   return (
-    <main className="bg-[#05050a] text-white">
+    <>
       <Navigation />
-      <Hero />
-      <About />
-      <Portfolio />
-      <Contact />
+      <main id="main-content" className="bg-[#05050a] text-white">
+        <Hero />
+        <About />
+        <Services />
+        <Process />
+        <Portfolio />
+        <FAQ />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
