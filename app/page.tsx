@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <>
       <Navigation />
-      <main id="main-content" className="bg-[#f2eddf] text-[#17171b]">
+      <main id="main-content" className="bg-[#f4f0e7] text-[#1a1a18]">
         <Hero />
         <About />
         <Services />

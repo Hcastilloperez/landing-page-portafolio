@@ -1,18 +1,24 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Archivo, Archivo_Black, Space_Mono } from 'next/font/google'
+import { Fraunces, DM_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 
-const archivo = Archivo({ variable: '--font-archivo', subsets: ['latin'] })
-const archivoBlack = Archivo_Black({
-  weight: '400',
-  variable: '--font-archivo-black',
+const fraunces = Fraunces({
   subsets: ['latin'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
 })
-const spaceMono = Space_Mono({
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
+
+const dmSans = DM_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dm-sans',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
 })
 
 export const metadata: Metadata = {
@@ -80,7 +86,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#f2eddf',
+  themeColor: '#f4f0e7',
   width: 'device-width',
   initialScale: 1,
 }
@@ -93,12 +99,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${archivo.variable} ${archivoBlack.variable} ${spaceMono.variable}`}
+      className={`${fraunces.variable} ${dmSans.variable} ${plexMono.variable}`}
     >
-      <body className="font-sans bg-[#f2eddf] text-[#17171b]">
+      <body className="font-sans bg-[#f4f0e7] text-[#1a1a18]">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#ffc93c] focus:text-[#17171b] focus:rounded-lg focus:font-bold focus:border-2 focus:border-[#17171b] focus:shadow-[3px_3px_0_0_#17171b]"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#1a1a18] focus:text-[#f4f0e7] focus:rounded-none focus:font-bold"
         >
           Saltar al contenido principal
         </a>

@@ -1,8 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, ArrowUpRight } from 'lucide-react';
+import { Mail, ArrowRight } from 'lucide-react';
 import { useState, useCallback, type FormEvent } from 'react';
+
+function SectionHeader({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-baseline gap-4 mb-5">
+      <span className="font-display italic text-2xl text-[#2e3bff]" aria-hidden="true">{index}</span>
+      <span className="eyebrow text-[#6f6e67]">{label}</span>
+      <div className="flex-1 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+    </div>
+  );
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -22,7 +32,7 @@ export default function Contact() {
   }, []);
 
   const inputClass =
-    'w-full px-4 py-3 bg-white border-2 border-[#17171b] rounded-sm text-[#17171b] placeholder-[#57575f]/60 focus:outline-none focus:shadow-[3px_3px_0_0_#2e5bff] focus:ring-2 focus:ring-[#2e5bff] transition-shadow';
+    'w-full bg-transparent border-b border-[#1a1a18]/25 py-3 text-[#1a1a18] placeholder-[#6f6e67]/70 focus:outline-none focus:border-[#2e3bff] transition-colors';
 
   return (
     <section id="contact" className="py-24 md:py-32 relative" aria-labelledby="contact-title">
@@ -33,57 +43,54 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-4 mb-5">
-            <span className="font-display text-5xl text-outline" aria-hidden="true">06</span>
-            <div className="h-[2px] w-12 bg-[#17171b]" aria-hidden="true" />
-            <span className="font-mono text-sm uppercase tracking-widest text-[#57575f]">
-              Contacto
-            </span>
-          </div>
+          <SectionHeader index="06" label="Contacto" />
           <div className="grid lg:grid-cols-2 gap-6 items-end">
             <h2
               id="contact-title"
-              className="font-display uppercase tracking-tight leading-[1.02] text-5xl md:text-7xl"
+              className="font-display font-medium tracking-tight text-5xl md:text-7xl leading-[1.02]"
             >
-              Hablemos<span className="text-[#ff4b2b]">.</span>
+              Hablemos<em className="italic font-normal text-[#2e3bff]">.</em>
             </h2>
-            <p className="text-lg text-[#57575f] leading-relaxed">
+            <p className="text-lg text-[#6f6e67] leading-relaxed">
               Cuéntame sobre tu proyecto. Me encantaría escuchar tu visión y explorar cómo puedo
               ayudarte a hacerla realidad.
             </p>
           </div>
         </motion.header>
 
-        <div className="grid lg:grid-cols-12 gap-10">
+        <div className="grid lg:grid-cols-12 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-4 space-y-5"
+            className="lg:col-span-4 space-y-8"
           >
-            <div className="brutal-card bg-white p-6 rotate-[-0.6deg]">
-              <span className="w-11 h-11 flex items-center justify-center bg-[#17c49b] border-2 border-[#17171b] shadow-[3px_3px_0_0_#17171b] rounded-sm mb-4" aria-hidden="true">
-                <Mail className="w-5 h-5" />
-              </span>
-              <p className="font-mono text-xs uppercase tracking-widest text-[#57575f] mb-2">
-                Escríbeme directo
-              </p>
+            <div>
+              <span className="eyebrow text-[#6f6e67] mb-3 block">Escríbeme directo</span>
               <a
                 href="mailto:hectorcastilloperez@gmail.com"
-                className="font-display text-sm uppercase tracking-wide whitespace-nowrap hover:text-[#2e5bff] underline decoration-2 underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e5bff] rounded-sm"
+                className="font-display text-2xl md:text-3xl tracking-tight break-words hover:text-[#2e3bff] hover:italic transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
               >
                 hectorcastilloperez@gmail.com
               </a>
+              <div className="mt-5 h-px bg-[#1a1a18]/15" aria-hidden="true" />
             </div>
 
-            <div className="brutal-card bg-[#ff86c8] p-6 rotate-[0.6deg]">
-              <p className="font-display uppercase tracking-tight text-2xl leading-tight mb-2">
-                Respuesta en menos de 24h
+            <div>
+              <span className="eyebrow text-[#6f6e67] mb-3 block">Disponibilidad</span>
+              <p className="font-display text-2xl tracking-tight">
+                Respuesta en{' '}
+                <em className="italic font-normal text-[#2e3bff]">menos de 24h</em>
               </p>
-              <p className="font-mono text-xs uppercase tracking-widest text-[#17171b]/70">
+              <p className="text-[#6f6e67] mt-2 text-sm">
                 Lunes a viernes · LATAM / USA / EU
               </p>
+              <div className="mt-5 h-px bg-[#1a1a18]/15" aria-hidden="true" />
             </div>
+
+            <blockquote className="font-display italic text-2xl leading-snug">
+              «El mejor momento para empezar fue ayer. El segundo mejor es hoy.»
+            </blockquote>
           </motion.div>
 
           <motion.div
@@ -92,10 +99,17 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-8"
           >
-            <form onSubmit={handleSubmit} className="brutal-card bg-[#fffdf4] p-6 md:p-8 space-y-5" aria-label="Formulario de contacto">
-              <div className="grid md:grid-cols-2 gap-5">
+            <form
+              onSubmit={handleSubmit}
+              className="border border-[#1a1a18]/20 bg-[#fffdf8] p-8 md:p-10 space-y-8"
+              aria-label="Formulario de contacto"
+            >
+              <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <label htmlFor="name" className="block font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block eyebrow text-[10px] text-[#6f6e67] mb-1"
+                  >
                     Nombre
                   </label>
                   <input
@@ -111,7 +125,10 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block eyebrow text-[10px] text-[#6f6e67] mb-1"
+                  >
                     Email
                   </label>
                   <input
@@ -128,7 +145,10 @@ export default function Contact() {
                 </div>
               </div>
               <div>
-                <label htmlFor="message" className="block font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                <label
+                  htmlFor="message"
+                  className="block eyebrow text-[10px] text-[#6f6e67] mb-1"
+                >
                   Mensaje
                 </label>
                 <textarea
@@ -138,18 +158,23 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Cuéntame sobre tu proyecto..."
                   required
-                  rows={6}
+                  rows={5}
                   className={`${inputClass} resize-none`}
                 />
               </div>
-              <button
-                type="submit"
-                disabled={submitted}
-                className="brutal-btn w-full py-4 bg-[#2e5bff] text-white font-display uppercase tracking-wide text-xl rounded-sm disabled:opacity-60 disabled:pointer-events-none"
-              >
-                {submitted ? '✓ ¡Mensaje enviado!' : 'Enviar mensaje'}
-                {!submitted && <ArrowUpRight className="w-5 h-5" aria-hidden="true" />}
-              </button>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <p className="font-mono text-[11px] text-[#6f6e67]">
+                  * Datos solo para responderte. Nada de spam.
+                </p>
+                <button
+                  type="submit"
+                  disabled={submitted}
+                  className="btn-editorial btn-editorial-accent disabled:opacity-60 disabled:pointer-events-none"
+                >
+                  {submitted ? '✓ ¡Mensaje enviado!' : 'Enviar mensaje'}
+                  {!submitted && <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />}
+                </button>
+              </div>
             </form>
           </motion.div>
         </div>

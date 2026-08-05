@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { useCallback } from 'react';
 
 const skills = [
-  { name: 'Desarrollo Web', level: 95, color: '#2e5bff' },
-  { name: 'Inteligencia Artificial', level: 88, color: '#ff4b2b' },
-  { name: 'Arquitectura de Sistemas', level: 90, color: '#ffc93c' },
-  { name: 'Diseño UX/UI', level: 85, color: '#17c49b' },
+  { name: 'Desarrollo Web', level: 95 },
+  { name: 'Inteligencia Artificial', level: 88 },
+  { name: 'Arquitectura de Sistemas', level: 90 },
+  { name: 'Diseño UX/UI', level: 85 },
 ];
 
 const passions = [
@@ -18,11 +18,15 @@ const passions = [
   'SaaS',
 ];
 
-const facts = [
-  { value: '+5', label: 'Años en software' },
-  { value: '16', label: 'Proyectos entregados' },
-  { value: 'LATAM', label: 'Clientes en 3 regiones' },
-];
+function SectionHeader({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-baseline gap-4 mb-5">
+      <span className="font-display italic text-2xl text-[#2e3bff]" aria-hidden="true">{index}</span>
+      <span className="eyebrow text-[#6f6e67]">{label}</span>
+      <div className="flex-1 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+    </div>
+  );
+}
 
 export default function About() {
   const skillDetails = useCallback((level: number) => {
@@ -41,78 +45,72 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-4 mb-5">
-            <span className="font-display text-5xl text-outline" aria-hidden="true">01</span>
-            <div className="h-[2px] w-12 bg-[#17171b]" aria-hidden="true" />
-            <span className="font-mono text-sm uppercase tracking-widest text-[#57575f]">
-              Sobre mí
-            </span>
-          </div>
+          <SectionHeader index="01" label="Sobre mí" />
           <h2
             id="about-title"
-            className="font-display uppercase tracking-tight leading-[1.02] text-4xl md:text-6xl mb-6"
+            className="font-display font-medium tracking-tight text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-6"
           >
-            Ingeniero de sistemas<br />
-            <span className="bg-[#ff86c8] px-3 border-2 border-[#17171b] shadow-[4px_4px_0_0_#17171b] inline-block rotate-[1deg] rounded-sm">
-              & full stack
-            </span>
+            Ingeniero de sistemas y{' '}
+            <em className="italic font-normal text-[#2e3bff]">full stack</em>, con una obsesión por
+            el detalle.
           </h2>
-          <p className="text-lg text-[#57575f] max-w-2xl leading-relaxed">
-            Con más de 5 años de experiencia, transformo ideas en productos digitales que combinan
-            diseño elegante con arquitectura sólida. Mi pasión: crear tecnología que genera impacto real.
-          </p>
         </motion.header>
 
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
-          <div className="lg:col-span-7 space-y-5">
-            <motion.p
+          <div className="lg:col-span-7">
+            <div className="space-y-5 text-[#6f6e67] leading-relaxed">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                Empecé en seguridad electrónica y consultoría, pero siempre me llamó el desarrollo de
+                software. Hoy combino ambas pasiones para crear plataformas que no solo funcionan,
+                sino que también son seguras y bien diseñadas.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                Cada proyecto es una excusa para aprender algo nuevo: de sistemas SaaS multi-tenant a
+                agentes de IA. He trabajado con startups y empresas establecidas para llevar sus
+                visiones a la realidad.
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
+                Cuando no estoy codificando, exploro nuevas tecnologías, contribuyo a proyectos open
+                source o disfruto del aire libre. El equilibrio entre trabajo y vida es clave para la
+                creatividad sostenida.
+              </motion.p>
+            </div>
+
+            <motion.blockquote
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-[#57575f] leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="font-display italic text-2xl leading-snug border-l-2 border-[#2e3bff] pl-6 my-10"
             >
-              Empecé en seguridad electrónica y consultoría, pero siempre me llamó el desarrollo de
-              software. Hoy combino ambas pasiones para crear plataformas que no solo funcionan,
-              sino que también son seguras y hermosas.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-[#57575f] leading-relaxed"
-            >
-              Cada proyecto es una excusa para aprender algo nuevo: de sistemas SaaS multi-tenant a
-              agentes de IA. He trabajado con startups y empresas establecidas para llevar sus
-              visiones a la realidad.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="text-[#57575f] leading-relaxed"
-            >
-              Cuando no estoy codificando, exploro nuevas tecnologías, contribuyo a proyectos open
-              source o disfruto del aire libre. El equilibrio entre trabajo y vida es clave para la
-              creatividad sostenida.
-            </motion.p>
+              «La buena arquitectura se siente. La mala se paga después.»
+            </motion.blockquote>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="grid grid-cols-3 gap-4 pt-4"
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="grid grid-cols-3 divide-x divide-[#1a1a18]/15 border-y border-[#1a1a18]/15"
             >
-              {facts.map((fact, i) => (
-                <div
-                  key={fact.label}
-                  className={`brutal-card p-4 bg-white ${
-                    i === 0 ? 'rotate-[-1.5deg]' : i === 1 ? 'rotate-[1deg]' : 'rotate-[-0.5deg]'
-                  }`}
-                >
-                  <p className="font-display text-3xl text-[#ff4b2b]">{fact.value}</p>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-[#57575f] mt-1 leading-tight">
-                    {fact.label}
-                  </p>
+              {[
+                ['+5', 'años en software'],
+                ['16', 'proyectos entregados'],
+                ['3', 'regiones con clientes'],
+              ].map(([value, label]) => (
+                <div key={label} className="px-4 py-4">
+                  <p className="font-display text-3xl text-[#2e3bff] leading-none">{value}</p>
+                  <p className="eyebrow text-[10px] text-[#6f6e67] mt-2">{label}</p>
                 </div>
               ))}
             </motion.div>
@@ -122,23 +120,22 @@ export default function About() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-5 space-y-5"
+            className="lg:col-span-5 space-y-6"
             aria-label="Habilidades técnicas"
           >
             {skills.map((skill, index) => (
-              <div key={skill.name} className="brutal-card bg-white p-4">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="font-bold uppercase tracking-wide">{skill.name}</span>
+              <div key={skill.name} className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="font-display text-lg">{skill.name}</span>
                   <span
-                    className="sticker px-2 py-0.5 text-[10px]"
-                    style={{ backgroundColor: skill.color }}
+                    className="eyebrow text-[10px] text-[#2e3bff]"
                     aria-label={`${skill.name}: ${skill.level}% - ${skillDetails(skill.level)}`}
                   >
-                    {skill.level}%
+                    {skill.level}% — {skillDetails(skill.level)}
                   </span>
                 </div>
                 <div
-                  className="h-5 bg-[#f2eddf] border-2 border-[#17171b] overflow-hidden rounded-sm"
+                  className="h-px bg-[#1a1a18]/15 overflow-hidden"
                   role="progressbar"
                   aria-valuenow={skill.level}
                   aria-valuemin={0}
@@ -149,24 +146,31 @@ export default function About() {
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     transition={{ duration: 0.9, delay: index * 0.1 }}
-                    className="h-full border-r-2 border-[#17171b]"
-                    style={{ backgroundColor: skill.color }}
+                    className="h-full bg-[#2e3bff]"
                   />
                 </div>
               </div>
             ))}
 
-            <div className="brutal-card p-4 bg-white rotate-[-0.5deg]">
-              <h3 className="sr-only">Áreas de especialización</h3>
-              <ul className="flex flex-wrap gap-2.5" role="list" aria-label="Áreas de especialización">
+            <div className="pt-4">
+              <h3 className="eyebrow text-[#6f6e67] mb-4">Áreas de especialización</h3>
+              <ul
+                className="font-display text-xl md:text-2xl space-y-2.5"
+                role="list"
+                aria-label="Áreas de especialización"
+              >
                 {passions.map((passion, index) => (
                   <motion.li
                     key={passion}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="flex items-baseline gap-4 border-b border-[#1a1a18]/10 pb-2.5"
                   >
-                    <span className="sticker bg-white px-3 py-1.5 hover:-rotate-2 transition-transform">
+                    <span className="font-mono text-xs text-[#2e3bff]" aria-hidden="true">
+                      0{index + 1}
+                    </span>
+                    <span className="hover:text-[#2e3bff] hover:italic transition-all cursor-default">
                       {passion}
                     </span>
                   </motion.li>

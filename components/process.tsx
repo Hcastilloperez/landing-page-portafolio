@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Search, Palette, Code, Rocket, RefreshCw, ArrowRight } from 'lucide-react';
+import { Search, Palette, Code, Rocket, RefreshCw } from 'lucide-react';
 
 const phases = [
   {
@@ -9,37 +9,42 @@ const phases = [
     title: 'Discovery',
     description: 'Entiendo tu negocio, objetivos y restricciones. Defino KPIs medibles desde el día uno.',
     icon: Search,
-    color: '#2e5bff',
   },
   {
     id: '02',
     title: 'Diseño',
     description: 'Arquitectura y UX diseñados para escalar. Prototipos interactivos antes de escribir código.',
     icon: Palette,
-    color: '#ff4b2b',
   },
   {
     id: '03',
     title: 'Ingeniería',
     description: 'Desarrollo ágil con code reviews, tests automatizados y despliegues continuos.',
     icon: Code,
-    color: '#ffc93c',
   },
   {
     id: '04',
     title: 'Lanzamiento',
     description: 'Deploy seguro con monitoring, logging y soporte las primeras 24 horas.',
     icon: Rocket,
-    color: '#17c49b',
   },
   {
     id: '05',
     title: 'Iteración',
     description: 'Mido contra KPIs, recolecto feedback y mejoro en ciclos cortos.',
     icon: RefreshCw,
-    color: '#ff86c8',
   },
 ];
+
+function SectionHeader({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-baseline gap-4 mb-5">
+      <span className="font-display italic text-2xl text-[#2e3bff]" aria-hidden="true">{index}</span>
+      <span className="eyebrow text-[#6f6e67]">{label}</span>
+      <div className="flex-1 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+    </div>
+  );
+}
 
 export default function Process() {
   return (
@@ -51,23 +56,15 @@ export default function Process() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-4 mb-5">
-            <span className="font-display text-5xl text-outline" aria-hidden="true">03</span>
-            <div className="h-[2px] w-12 bg-[#17171b]" aria-hidden="true" />
-            <span className="font-mono text-sm uppercase tracking-widest text-[#57575f]">
-              Método
-            </span>
-          </div>
+          <SectionHeader index="03" label="Método" />
           <h2
             id="process-title"
-            className="font-display uppercase tracking-tight leading-[1.02] text-4xl md:text-6xl mb-6"
+            className="font-display font-medium tracking-tight text-4xl md:text-6xl leading-[1.05] mb-6"
           >
-            Cinco fases.{' '}
-            <span className="bg-[#17c49b] px-3 border-2 border-[#17171b] shadow-[4px_4px_0_0_#17171b] inline-block rotate-[1deg] rounded-sm">
-              una órbita
-            </span>
+            Cinco fases,{' '}
+            <em className="italic font-normal text-[#2e3bff]">una sola órbita</em>
           </h2>
-          <p className="text-lg text-[#57575f] max-w-2xl leading-relaxed">
+          <p className="text-lg text-[#6f6e67] max-w-2xl leading-relaxed">
             Cada proyecto pasa por las mismas cinco fases. Lo que cambia es el alcance y el tiempo
             dentro de cada una.
           </p>
@@ -75,11 +72,11 @@ export default function Process() {
 
         <div className="relative">
           <div
-            className="hidden lg:block absolute top-8 left-0 right-0 border-t-2 border-dashed border-[#17171b]/30"
+            className="hidden lg:block absolute top-7 left-0 right-0 border-t border-dashed border-[#1a1a18]/25"
             aria-hidden="true"
           />
 
-          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6" role="list">
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-10" role="list">
             {phases.map((phase, index) => {
               const IconComponent = phase.icon;
               return (
@@ -88,38 +85,24 @@ export default function Process() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="relative"
                 >
-                  <article className="group brutal-card brutal-card-hover bg-white p-6 h-full flex flex-col">
-                    <div className="flex items-center justify-between mb-5">
-                      <span
-                        className="w-14 h-14 flex items-center justify-center border-2 border-[#17171b] shadow-[3px_3px_0_0_#17171b] rounded-sm"
-                        style={{ backgroundColor: phase.color }}
-                        aria-hidden="true"
-                      >
-                        <IconComponent className="w-6 h-6 text-[#17171b]" />
-                      </span>
-                      <span className="font-display text-4xl text-outline opacity-70" aria-hidden="true">
+                  <article className="group h-full">
+                    <div className="relative mb-6">
+                      <div className="w-14 h-14 flex items-center justify-center border border-[#1a1a18]/20 rounded-full bg-[#fffdf8] group-hover:bg-[#2e3bff] group-hover:border-[#2e3bff] group-hover:text-white transition-all" aria-hidden="true">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <span className="absolute -right-0 top-0 font-display italic text-5xl text-[#1a1a18]/10 leading-none" aria-hidden="true">
                         {phase.id}
                       </span>
                     </div>
 
-                    <h3 className="font-display text-lg uppercase tracking-wide mb-3">
+                    <p className="eyebrow text-[10px] text-[#2e3bff] mb-2">Fase {phase.id}</p>
+                    <h3 className="font-display text-2xl mb-3 group-hover:italic transition-all">
                       {phase.title}
                     </h3>
-
-                    <p className="text-[#57575f] text-sm leading-relaxed mb-4 flex-grow">
+                    <p className="text-[#6f6e67] text-sm leading-relaxed">
                       {phase.description}
                     </p>
-
-                    {index < phases.length - 1 && (
-                      <span
-                        className="hidden lg:flex absolute -right-6 top-8 z-10 w-9 h-9 items-center justify-center bg-white border-2 border-[#17171b] shadow-[2px_2px_0_0_#17171b] rounded-full"
-                        aria-hidden="true"
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    )}
                   </article>
                 </motion.li>
               );
@@ -131,12 +114,9 @@ export default function Process() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-14 text-center font-mono text-sm uppercase tracking-widest text-[#57575f]"
+          className="mt-14 font-display italic text-xl text-[#6f6e67] border-t border-[#1a1a18]/15 pt-6"
         >
-          <span className="inline-block bg-[#ffc93c] border-2 border-[#17171b] shadow-[2px_2px_0_0_#17171b] px-2 py-0.5 rotate-[-1deg] rounded-sm text-[#17171b] mr-2">
-            Nota
-          </span>
-          Transparencia en cada fase, sin sorpresas de último minuto
+          Transparencia en cada fase, sin sorpresas de último minuto.
         </motion.p>
       </div>
     </section>

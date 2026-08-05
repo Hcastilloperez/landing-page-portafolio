@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 const navItems = [
   { label: 'Sobre Mí', href: '#about' },
@@ -38,7 +38,7 @@ export default function Navigation() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 bg-[#f2eddf] border-b-2 border-[#17171b]"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#f4f0e7]/95 backdrop-blur-sm border-b border-[#1a1a18]/15"
       role="banner"
     >
       <nav
@@ -48,28 +48,30 @@ export default function Navigation() {
       >
         <a
           href="#"
-          className="group inline-flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf] rounded-md"
+          className="group flex items-baseline gap-2 focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
           aria-label="Héctor Castillo - Inicio"
         >
-          <span className="font-display text-xl bg-[#17171b] text-[#f2eddf] px-2.5 py-1 border-2 border-[#17171b] shadow-[3px_3px_0_0_#ffc93c] group-hover:shadow-[3px_3px_0_0_#ff4b2b] transition-shadow rounded-sm">
-            HC<span className="text-[#ffc93c]">.</span>
+          <span className="font-display text-2xl font-semibold tracking-tight">
+            Héctor <span className="italic font-normal">Castillo</span>
           </span>
-          <span className="font-mono text-xs uppercase tracking-widest text-[#57575f] hidden sm:block">
-            Héctor Castillo
-          </span>
+          <span className="w-2 h-2 bg-[#2e3bff] inline-block transition-transform group-hover:rotate-45" aria-hidden="true" />
         </a>
 
-        <ul className="hidden md:flex items-center gap-2" role="list">
+        <ul className="hidden md:flex items-center gap-7" role="list">
           {navItems.map((item, index) => (
             <li key={item.href}>
               <a
                 id={`nav-item-${index}`}
                 href={item.href}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                className="inline-block px-2.5 py-1.5 text-sm font-bold uppercase tracking-wide text-[#17171b] hover:bg-[#ffc93c] hover:-rotate-1 border-2 border-transparent hover:border-[#17171b] hover:shadow-[3px_3px_0_0_#17171b] transition-all rounded-sm focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf]"
+                className="eyebrow text-[#6f6e67] hover:text-[#1a1a18] relative py-1 transition-colors group focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
                 role="listitem"
               >
                 {item.label}
+                <span
+                  className="absolute left-0 bottom-0 w-0 h-px bg-[#2e3bff] group-hover:w-full transition-all duration-300"
+                  aria-hidden="true"
+                />
               </a>
             </li>
           ))}
@@ -77,22 +79,22 @@ export default function Navigation() {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex brutal-btn px-5 py-2.5 bg-[#2e5bff] text-white text-sm uppercase tracking-wide rounded-sm"
+          className="hidden md:inline-flex btn-editorial px-5 py-2.5"
         >
-          Contactar
-          <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+          Escríbeme
+          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
         </a>
 
         <button
           onClick={toggleMenu}
           onBlur={() => setFocusedIndex(null)}
           onFocus={() => setFocusedIndex(-1)}
-          className="md:hidden brutal-btn p-2 bg-white rounded-sm focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf]"
+          className="md:hidden p-2 -mr-2 hover:bg-[#1a1a18]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </nav>
 
@@ -100,36 +102,37 @@ export default function Navigation() {
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.18 }}
-            className="md:hidden border-t-2 border-[#17171b] bg-[#f2eddf] shadow-[0_6px_0_0_#17171b]"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22 }}
+            className="md:hidden overflow-hidden border-t border-[#1a1a18]/15 bg-[#f4f0e7]"
             role="dialog"
             aria-modal="true"
             aria-label="Menú móvil"
           >
-            <ul className="px-4 py-4 space-y-2" role="list">
-              {navItems.map((item, index) => (
+            <ul className="px-4 py-4 space-y-1" role="list">
+              {navItems.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
                     onClick={closeMenu}
-                    className="block px-4 py-2.5 font-bold uppercase tracking-wide border-2 border-[#17171b] bg-white shadow-[3px_3px_0_0_#17171b] hover:bg-[#ffc93c] transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-[#2e5bff]"
+                    className="block font-display text-2xl py-2 border-b border-[#1a1a18]/10 hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff]"
                     role="listitem"
                   >
                     {item.label}
                   </a>
                 </li>
               ))}
-              <li>
+              <li className="pt-4">
                 <a
                   href="#contact"
                   onClick={closeMenu}
-                  className="block px-4 py-2.5 font-bold uppercase tracking-wide border-2 border-[#17171b] bg-[#2e5bff] text-white shadow-[3px_3px_0_0_#17171b] hover:bg-[#1f4ae0] transition-colors rounded-sm text-center"
+                  className="btn-editorial w-full"
                   role="listitem"
                 >
-                  Contactar
+                  Escríbeme
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
               </li>
             </ul>

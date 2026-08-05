@@ -32,6 +32,16 @@ const faqs = [
   },
 ];
 
+function SectionHeader({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-baseline gap-4 mb-5">
+      <span className="font-display italic text-2xl text-[#2e3bff]" aria-hidden="true">{index}</span>
+      <span className="eyebrow text-[#6f6e67]">{label}</span>
+      <div className="flex-1 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+    </div>
+  );
+}
+
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -41,37 +51,27 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="py-24 md:py-32 relative" aria-labelledby="faq-title">
-      <div className="absolute inset-0 bg-dots opacity-60 pointer-events-none" aria-hidden="true" />
-
-      <div className="max-w-3xl mx-auto px-4 relative z-10">
+      <div className="max-w-3xl mx-auto px-4">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-4 mb-5">
-            <span className="font-display text-5xl text-outline" aria-hidden="true">05</span>
-            <div className="h-[2px] w-12 bg-[#17171b]" aria-hidden="true" />
-            <span className="font-mono text-sm uppercase tracking-widest text-[#57575f]">
-              Preguntas
-            </span>
-          </div>
+          <SectionHeader index="05" label="Preguntas" />
           <h2
             id="faq-title"
-            className="font-display uppercase tracking-tight leading-[1.02] text-4xl md:text-6xl mb-6"
+            className="font-display font-medium tracking-tight text-4xl md:text-6xl leading-[1.05] mb-6"
           >
             Lo que más{' '}
-            <span className="bg-[#2e5bff] text-[#f2eddf] px-3 border-2 border-[#17171b] shadow-[4px_4px_0_0_#17171b] inline-block rotate-[1deg] rounded-sm">
-              me preguntan
-            </span>
+            <em className="italic font-normal text-[#2e3bff]">me preguntan</em>
           </h2>
-          <p className="text-lg text-[#57575f] leading-relaxed">
+          <p className="text-lg text-[#6f6e67] leading-relaxed">
             Antes de la primera llamada. Si no está tu pregunta, escríbeme.
           </p>
         </motion.header>
 
-        <div className="space-y-5" role="list">
+        <div className="border-t border-[#1a1a18]/15" role="list">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -80,9 +80,7 @@ export default function FAQ() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className={`brutal-card ${
-                  isOpen ? 'bg-[#ffc93c] shadow-[6px_6px_0_0_#17171b] translate-x-[-2px] translate-y-[-2px]' : 'bg-white'
-                }`}
+                className="border-b border-[#1a1a18]/15"
                 role="listitem"
               >
                 <button
@@ -93,21 +91,30 @@ export default function FAQ() {
                       toggleIndex(index);
                     }
                   }}
-                  className="w-full px-6 py-5 flex items-center justify-between gap-4 text-left focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf] rounded-[0.5rem]"
+                  className="w-full py-6 flex items-center justify-between gap-4 text-left focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${faq.id}`}
                   id={`faq-question-${faq.id}`}
                 >
-                  <span className="font-display text-lg md:text-xl uppercase tracking-wide">
-                    {faq.question}
+                  <span className="flex items-baseline gap-4">
+                    <span className="font-mono text-xs text-[#2e3bff] shrink-0" aria-hidden="true">
+                      0{index + 1}
+                    </span>
+                    <span
+                      className={`font-display text-xl md:text-2xl tracking-tight ${
+                        isOpen ? 'italic text-[#2e3bff]' : ''
+                      }`}
+                    >
+                      {faq.question}
+                    </span>
                   </span>
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="shrink-0 w-9 h-9 flex items-center justify-center border-2 border-[#17171b] shadow-[2px_2px_0_0_#17171b] bg-white rounded-sm"
+                    className="shrink-0"
                     aria-hidden="true"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className={`w-5 h-5 ${isOpen ? 'text-[#2e3bff]' : 'text-[#1a1a18]'}`} />
                   </motion.span>
                 </button>
 
@@ -123,7 +130,7 @@ export default function FAQ() {
                       transition={{ duration: 0.22 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 text-[#17171b] leading-relaxed border-t-2 border-[#17171b] pt-4">
+                      <div className="pb-6 pl-8 text-[#6f6e67] leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>

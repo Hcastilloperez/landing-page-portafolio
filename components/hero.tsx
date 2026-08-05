@@ -1,62 +1,129 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Stethoscope } from 'lucide-react';
 
 const marqueeItems = [
-  'FULL STACK',
-  'IA & AGENTES',
-  'SAAS',
-  'REACT / NEXT.JS',
-  'NODE.JS',
-  'POSTGRESQL',
-  'AUTOMATIZACIÓN',
-  'E-COMMERCE',
+  'Software a medida',
+  'Agentes de IA',
+  'SaaS multi-tenant',
+  'E-commerce',
+  'Automatización',
+  'Diseño de producto',
 ];
 
-const stats = [
-  { value: '+5', label: 'Años de experiencia' },
-  { value: '3', label: 'SaaS en producción' },
-  { value: '100%', label: 'Código con propósito' },
-];
+function Masthead() {
+  return (
+    <div
+      className="grid grid-cols-1 sm:grid-cols-3 border-y border-[#1a1a18]/15 divide-y sm:divide-y-0 sm:divide-x divide-[#1a1a18]/15"
+      aria-hidden="true"
+    >
+      <p className="eyebrow text-[#6f6e67] py-3">HE. — Portafolio</p>
+      <p className="eyebrow text-[#6f6e67] py-3 sm:px-4">
+        Ingeniero de Sistemas <span className="text-[#1a1a18]">·</span> Software Engineer
+      </p>
+      <p className="eyebrow text-[#6f6e67] py-3 sm:px-4">Colombia / 2026</p>
+    </div>
+  );
+}
 
-const stackChips = ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'Tailwind', 'Prisma'];
+function FeaturedCard() {
+  return (
+    <div className="relative border border-[#1a1a18]/20 bg-[#fffdf8]">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-[#1a1a18]/15">
+        <span className="eyebrow text-[#1a1a18]">Último lanzamiento</span>
+        <span className="eyebrow text-[#2e3bff]">2026</span>
+      </div>
+
+      <div className="px-5 py-6">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-9 h-9 flex items-center justify-center bg-[#0ea5e9] text-[#1a1a18] rounded-full" aria-hidden="true">
+            <Stethoscope className="w-4 h-4" />
+          </span>
+          <div>
+            <p className="font-display text-xl font-semibold leading-none">MediCitas</p>
+            <p className="eyebrow text-[#6f6e67] mt-1.5">SaaS · Healthtech</p>
+          </div>
+        </div>
+
+        <div className="mb-5" aria-hidden="true">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="eyebrow text-[#6f6e67]">Agenda</span>
+            <span className="eyebrow text-[#6f6e67]">Mar 4</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <div className="col-span-2 space-y-1.5">
+              {[
+                ['08:00', '82%'],
+                ['08:20', '58%'],
+                ['09:00', '76%'],
+              ].map(([time, w]) => (
+                <div key={time} className="flex items-center gap-2">
+                  <span className="font-mono text-[10px] text-[#6f6e67] w-9">{time}</span>
+                  <span
+                    className="h-2 bg-[#0ea5e9]/70"
+                    style={{ width: w }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="space-y-1.5">
+              {[
+                ['Hoy', '8'],
+                ['Nuevos', '+3'],
+              ].map(([k, v]) => (
+                <div key={k} className="border border-[#1a1a18]/20 px-2 py-1.5">
+                  <p className="eyebrow text-[10px] text-[#6f6e67]">{k}</p>
+                  <p className="font-display text-lg leading-none">{v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="https://medicitas.hectorcastillo.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-editorial-text text-[11px]"
+          aria-label="Ver proyecto MediCitas (se abre en nueva pestaña)"
+        >
+          Ver proyecto
+          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
-    <section
-      className="relative pt-16 md:pt-20 overflow-hidden"
-      aria-labelledby="hero-title"
-    >
-      <div className="absolute inset-0 bg-dots pointer-events-none" aria-hidden="true" />
-
-      <motion.div
-        className="absolute -top-12 -right-12 w-56 h-56 bg-[#ff4b2b] border-2 border-[#17171b] rotate-6 pointer-events-none hidden md:block"
-        animate={{ rotate: [6, 9, 6] }}
-        transition={{ duration: 8, repeat: Infinity }}
+    <section className="relative pt-16 md:pt-20 overflow-hidden" aria-labelledby="hero-title">
+      <span
+        className="absolute -top-24 -right-10 font-display italic text-[22rem] leading-none text-[#1a1a18]/[0.045] select-none hidden lg:block pointer-events-none"
         aria-hidden="true"
       >
-        <span className="font-display text-3xl text-[#f2eddf] [writing-mode:vertical-rl] block mt-6 ml-3">
-          SIN BULLSHIT
-        </span>
-      </motion.div>
+        H
+      </span>
 
-      <div className="relative max-w-6xl mx-auto px-4 py-16 md:py-24">
-        <div className="grid lg:grid-cols-12 gap-14 items-center">
+      <div className="relative max-w-6xl mx-auto px-4">
+        <div className="pt-10 pb-4">
+          <Masthead />
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-12 py-12 md:py-16 items-start">
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-3 mb-8"
+              className="flex items-center gap-3 mb-8"
             >
-              <span className="sticker bg-[#17c49b] rotate-[-2deg] px-3 py-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#17171b] animate-pulse" aria-hidden="true" />
-                Disponible para proyectos
+              <span className="relative flex w-2 h-2" role="status" aria-label="Disponible para proyectos">
+                <span className="absolute inline-flex w-full h-full rounded-full bg-[#e03c31] opacity-60 animate-ping" aria-hidden="true" />
+                <span className="relative inline-flex w-2 h-2 rounded-full bg-[#e03c31]" aria-hidden="true" />
               </span>
-              <span className="sticker bg-white px-3 py-1.5 rotate-1 hidden sm:inline-flex">
-                Bogotá · CO
-              </span>
+              <span className="eyebrow text-[#1a1a18]">Disponible para nuevos proyectos — Q3 2026</span>
             </motion.div>
 
             <motion.h1
@@ -64,139 +131,80 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="font-display uppercase tracking-tight leading-[0.95] mb-8"
+              className="font-display font-medium tracking-tight text-[15vw] leading-[0.98] sm:text-7xl md:text-[5.2rem] mb-8"
             >
-              <span className="block text-6xl md:text-8xl">Código</span>
-              <span className="block text-6xl md:text-8xl mt-1">
-                con{' '}
-                <span className="relative inline-block bg-[#ffc93c] px-3 border-2 border-[#17171b] shadow-[4px_4px_0_0_#17171b] rotate-[-2deg] rounded-sm">
-                  propósito
-                </span>
-              </span>
+              Código con{' '}
+              <em className="italic font-normal text-[#2e3bff]">propósito</em>
+              <sup className="font-mono text-base align-super ml-1" aria-hidden="true">*</sup>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-lg text-[#57575f] max-w-xl mb-10 leading-relaxed"
+              className="text-lg text-[#6f6e67] max-w-xl mb-10 leading-relaxed"
             >
-              Ingeniero de Sistemas y Desarrollador Full Stack. Construyo{' '}
-              <strong className="text-[#17171b]">SaaS, agentes de IA y plataformas empresariales</strong>{' '}
-              donde el diseño y la arquitectura trabajan igual de duro.
+              Construyo <strong className="font-semibold text-[#1a1a18]">SaaS, agentes de IA y plataformas empresariales</strong> donde
+              el diseño editorial y la arquitectura de software trabajan en el mismo equipo.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12"
             >
-              <a
-                href="#portfolio"
-                className="brutal-btn px-7 py-3.5 bg-[#17171b] text-[#f2eddf] font-display uppercase tracking-wide text-lg rounded-sm"
-              >
+              <a href="#portfolio" className="btn-editorial btn-editorial-accent">
                 Ver portafolio
-                <ArrowRight className="w-5 h-5" aria-hidden="true" />
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
               </a>
-              <a
-                href="#contact"
-                className="brutal-btn px-7 py-3.5 bg-white text-[#17171b] font-display uppercase tracking-wide text-lg rounded-sm"
-              >
-                Hablemos
-                <ArrowUpRight className="w-5 h-5" aria-hidden="true" />
+              <a href="#contact" className="btn-editorial-text">
+                Escríbeme
+                <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </a>
             </motion.div>
 
-            <motion.dl
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="grid grid-cols-3 gap-4 max-w-lg"
+              className="grid grid-cols-3 divide-x divide-[#1a1a18]/15 border-y border-[#1a1a18]/15 max-w-lg"
             >
-              {stats.map((stat) => (
-                <div key={stat.label} className="brutal-card p-3 bg-white">
-                  <dt className="sr-only">{stat.label}</dt>
-                  <dd className="font-display text-3xl text-[#2e5bff]">{stat.value}</dd>
-                  <dd className="font-mono text-[10px] uppercase tracking-widest text-[#57575f] mt-1 leading-tight">
-                    {stat.label}
-                  </dd>
+              {[
+                ['+5', 'años de experiencia'],
+                ['3', 'SaaS en producción'],
+                ['LATAM', 'clientes en 3 regiones'],
+              ].map(([value, label]) => (
+                <div key={label} className="px-4 py-4">
+                  <p className="font-display text-3xl text-[#2e3bff] leading-none">{value}</p>
+                  <p className="eyebrow text-[10px] text-[#6f6e67] mt-2">{label}</p>
                 </div>
               ))}
-            </motion.dl>
-          </div>
-
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-              className="relative"
-            >
-              <div className="sticker bg-[#ff86c8] px-3 py-1.5 rotate-[-6deg] absolute -top-5 -left-3 z-10">
-                Full Stack
-              </div>
-              <div className="sticker bg-[#ff4b2b] px-3 py-1.5 rotate-[4deg] absolute -right-3 top-24 z-10 text-white">
-                AI + SaaS
-              </div>
-              <div className="sticker bg-[#17c49b] px-3 py-1.5 rotate-[5deg] absolute -bottom-5 left-8 z-10">
-                Open to work
-              </div>
-
-              <div className="animate-float-card">
-                <div className="brutal-card rotate-1 bg-[#fffdf4] p-6 relative z-[5]">
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#ffc93c] border-2 border-[#17171b] shadow-[2px_2px_0_0_#17171b] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-widest whitespace-nowrap rounded-sm">
-                    Tarjeta de presentación
-                  </span>
-
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 shrink-0 bg-[#17171b] text-[#f2eddf] font-display text-2xl flex items-center justify-center border-2 border-[#17171b] shadow-[4px_4px_0_0_#2e5bff] rounded-sm">
-                      HC
-                    </div>
-                    <div>
-                      <p className="font-display text-2xl uppercase leading-none">Héctor Castillo</p>
-                      <p className="font-mono text-xs uppercase tracking-widest text-[#57575f] mt-1">
-                        Software Engineer
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-6" aria-label="Stack tecnológico">
-                    {stackChips.map((chip) => (
-                      <span
-                        key={chip}
-                        className="sticker bg-[#f2eddf] px-2.5 py-1 text-[11px]"
-                      >
-                        {chip}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div
-                    className="h-9 flex items-end gap-[3px] mb-5"
-                    role="img"
-                    aria-label="Código de barras decorativo"
-                  >
-                    {[9, 3, 6, 4, 8, 2, 7, 5, 10, 4, 6, 3, 9, 5, 7].map((w, i) => (
-                      <span key={i} className="bg-[#17171b]" style={{ width: `${w}px`, height: '100%' }} />
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between border-t-2 border-[#17171b] pt-4">
-                    <span className="font-mono text-[11px] font-bold uppercase tracking-widest">
-                      hectorcastillo.net
-                    </span>
-                    <span className="w-8 h-8 bg-[#17171b] rotate-45" aria-hidden="true" />
-                  </div>
-                </div>
-              </div>
             </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="lg:col-span-5 lg:pl-8"
+          >
+            <div className="animate-float-up">
+              <FeaturedCard />
+            </div>
+            <p className="font-display italic text-lg text-[#6f6e67] mt-8 leading-snug">
+              «El diseño no es solo cómo se ve. Es cómo funciona el software desde adentro.»
+            </p>
+          </motion.div>
         </div>
+
+        <p className="font-mono text-[11px] text-[#6f6e67] pb-10">
+          * Diseñado en Colombia, probado en producción.
+        </p>
       </div>
 
       <div
-        className="relative bg-[#ffc93c] border-y-2 border-[#17171b] py-3 overflow-hidden"
+        className="relative border-y border-[#1a1a18]/15 py-3 overflow-hidden bg-[#fffdf8]/60"
         aria-hidden="true"
       >
         <div className="marquee-track">
@@ -205,10 +213,10 @@ export default function Hero() {
               {marqueeItems.map((item) => (
                 <span
                   key={`${copy}-${item}`}
-                  className="font-display uppercase tracking-wide text-lg px-6 flex items-center gap-6"
+                  className="font-display italic text-xl md:text-2xl px-8 flex items-center gap-8 text-[#1a1a18]/80"
                 >
                   {item}
-                  <span className="inline-block w-3 h-3 bg-[#17171b] rotate-45" />
+                  <span className="font-normal text-[#2e3bff]" aria-hidden="true">✦</span>
                 </span>
               ))}
             </div>
