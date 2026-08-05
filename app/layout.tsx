@@ -1,11 +1,17 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Archivo, Archivo_Black, Space_Mono } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const archivo = Archivo({ variable: '--font-archivo', subsets: ['latin'] })
+const archivoBlack = Archivo_Black({
+  weight: '400',
+  variable: '--font-archivo-black',
+  subsets: ['latin'],
+})
+const spaceMono = Space_Mono({
+  weight: ['400', '700'],
+  variable: '--font-space-mono',
   subsets: ['latin'],
 })
 
@@ -73,8 +79,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#0f1117',
+  colorScheme: 'light',
+  themeColor: '#f2eddf',
   width: 'device-width',
   initialScale: 1,
 }
@@ -85,11 +91,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans antialiased bg-[#05050a] text-white">
-        <a 
-          href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#00d48e] focus:text-[#0f1117] focus:rounded-lg focus:font-semibold"
+    <html
+      lang="es"
+      className={`${archivo.variable} ${archivoBlack.variable} ${spaceMono.variable}`}
+    >
+      <body className="font-sans bg-[#f2eddf] text-[#17171b]">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#ffc93c] focus:text-[#17171b] focus:rounded-lg focus:font-bold focus:border-2 focus:border-[#17171b] focus:shadow-[3px_3px_0_0_#17171b]"
         >
           Saltar al contenido principal
         </a>

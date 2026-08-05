@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 const navItems = [
   { label: 'Sobre Mí', href: '#about' },
@@ -37,55 +37,62 @@ export default function Navigation() {
   }, [closeMenu]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0f1117]/90 border-b border-[#00d48e]/10" role="banner">
-      <nav className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between" role="navigation" aria-label="Navegación principal">
-        <a 
-          href="#" 
-          className="flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#00d48e] rounded-lg"
+    <header
+      className="fixed top-0 left-0 right-0 z-50 bg-[#f2eddf] border-b-2 border-[#17171b]"
+      role="banner"
+    >
+      <nav
+        className="max-w-6xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between gap-4"
+        role="navigation"
+        aria-label="Navegación principal"
+      >
+        <a
+          href="#"
+          className="group inline-flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf] rounded-md"
           aria-label="Héctor Castillo - Inicio"
         >
-          <span className="text-[#00d48e] font-mono text-lg" aria-hidden="true">&lt;</span>
-          <span className="text-2xl font-bold text-[#00d48e]">HC</span>
-          <span className="text-[#00d48e] font-mono text-lg" aria-hidden="true">/&gt;</span>
+          <span className="font-display text-xl bg-[#17171b] text-[#f2eddf] px-2.5 py-1 border-2 border-[#17171b] shadow-[3px_3px_0_0_#ffc93c] group-hover:shadow-[3px_3px_0_0_#ff4b2b] transition-shadow rounded-sm">
+            HC<span className="text-[#ffc93c]">.</span>
+          </span>
+          <span className="font-mono text-xs uppercase tracking-widest text-[#57575f] hidden sm:block">
+            Héctor Castillo
+          </span>
         </a>
 
-        <ul className="hidden md:flex items-center gap-8" role="list">
+        <ul className="hidden md:flex items-center gap-2" role="list">
           {navItems.map((item, index) => (
             <li key={item.href}>
               <a
                 id={`nav-item-${index}`}
                 href={item.href}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                className="relative text-[#a0a8b8] hover:text-white transition-colors group focus:outline-none focus:ring-2 focus:ring-[#00d48e] rounded px-2 py-1"
+                className="inline-block px-2.5 py-1.5 text-sm font-bold uppercase tracking-wide text-[#17171b] hover:bg-[#ffc93c] hover:-rotate-1 border-2 border-transparent hover:border-[#17171b] hover:shadow-[3px_3px_0_0_#17171b] transition-all rounded-sm focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf]"
                 role="listitem"
               >
                 {item.label}
-                <span 
-                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00d48e] to-[#ff6b35] group-hover:w-full transition-all" 
-                  aria-hidden="true"
-                />
               </a>
             </li>
           ))}
         </ul>
 
-        <a 
-          href="#contact" 
-          className="hidden md:inline-flex px-6 py-2 rounded-full bg-gradient-to-r from-[#00d48e] to-[#00b570] text-[#0f1117] font-semibold hover:shadow-lg hover:shadow-[#00d48e]/40 transition-all focus:outline-none focus:ring-2 focus:ring-[#00d48e] focus:ring-offset-2 focus:ring-offset-[#0f1117]"
+        <a
+          href="#contact"
+          className="hidden md:inline-flex brutal-btn px-5 py-2.5 bg-[#2e5bff] text-white text-sm uppercase tracking-wide rounded-sm"
         >
           Contactar
+          <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
         </a>
 
         <button
           onClick={toggleMenu}
           onBlur={() => setFocusedIndex(null)}
           onFocus={() => setFocusedIndex(-1)}
-          className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#00d48e]"
+          className="md:hidden brutal-btn p-2 bg-white rounded-sm focus:outline-none focus:ring-2 focus:ring-[#2e5bff] focus:ring-offset-2 focus:ring-offset-[#f2eddf]"
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </nav>
 
@@ -96,19 +103,19 @@ export default function Navigation() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-[#00d48e]/10 bg-[#16213e]/50 backdrop-blur-lg"
+            transition={{ duration: 0.18 }}
+            className="md:hidden border-t-2 border-[#17171b] bg-[#f2eddf] shadow-[0_6px_0_0_#17171b]"
             role="dialog"
             aria-modal="true"
             aria-label="Menú móvil"
           >
-            <ul className="px-4 py-4 space-y-3" role="list">
+            <ul className="px-4 py-4 space-y-2" role="list">
               {navItems.map((item, index) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
                     onClick={closeMenu}
-                    className="block px-4 py-2 text-[#a0a8b8] hover:text-[#00d48e] hover:bg-[#16213e] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#00d48e]"
+                    className="block px-4 py-2.5 font-bold uppercase tracking-wide border-2 border-[#17171b] bg-white shadow-[3px_3px_0_0_#17171b] hover:bg-[#ffc93c] transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-[#2e5bff]"
                     role="listitem"
                   >
                     {item.label}
@@ -119,7 +126,7 @@ export default function Navigation() {
                 <a
                   href="#contact"
                   onClick={closeMenu}
-                  className="block px-4 py-2 rounded-lg bg-gradient-to-r from-[#00d48e] to-[#00b570] text-[#0f1117] font-semibold text-center"
+                  className="block px-4 py-2.5 font-bold uppercase tracking-wide border-2 border-[#17171b] bg-[#2e5bff] text-white shadow-[3px_3px_0_0_#17171b] hover:bg-[#1f4ae0] transition-colors rounded-sm text-center"
                   role="listitem"
                 >
                   Contactar

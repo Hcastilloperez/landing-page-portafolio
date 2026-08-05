@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
+import { Mail, ArrowUpRight } from 'lucide-react';
 import { useState, useCallback, type FormEvent } from 'react';
 
 export default function Contact() {
@@ -21,109 +21,138 @@ export default function Contact() {
     }, 3000);
   }, []);
 
+  const inputClass =
+    'w-full px-4 py-3 bg-white border-2 border-[#17171b] rounded-sm text-[#17171b] placeholder-[#57575f]/60 focus:outline-none focus:shadow-[3px_3px_0_0_#2e5bff] focus:ring-2 focus:ring-[#2e5bff] transition-shadow';
+
   return (
-    <section 
-      id="contact" 
-      className="py-32 relative"
-      aria-labelledby="contact-title"
-    >
+    <section id="contact" className="py-24 md:py-32 relative" aria-labelledby="contact-title">
       <div className="max-w-6xl mx-auto px-4">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 max-w-3xl"
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-[#00d48e] font-mono text-sm" aria-hidden="true">05</span>
-            <div className="h-px w-8 bg-gradient-to-r from-[#00d48e] to-transparent" aria-hidden="true" />
-            <span className="text-[#a0a8b8] text-sm uppercase tracking-widest">Contacto</span>
+          <div className="flex items-center gap-4 mb-5">
+            <span className="font-display text-5xl text-outline" aria-hidden="true">06</span>
+            <div className="h-[2px] w-12 bg-[#17171b]" aria-hidden="true" />
+            <span className="font-mono text-sm uppercase tracking-widest text-[#57575f]">
+              Contacto
+            </span>
           </div>
-          <h2 id="contact-title" className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Hablemos
-          </h2>
-          <p className="text-lg text-[#a0a8b8] leading-relaxed">
-            Cuéntame sobre tu proyecto. Me encantaría escuchar tu visión y explorar cómo puedo ayudarte a hacerla realidad.
-          </p>
+          <div className="grid lg:grid-cols-2 gap-6 items-end">
+            <h2
+              id="contact-title"
+              className="font-display uppercase tracking-tight leading-[1.02] text-5xl md:text-7xl"
+            >
+              Hablemos<span className="text-[#ff4b2b]">.</span>
+            </h2>
+            <p className="text-lg text-[#57575f] leading-relaxed">
+              Cuéntame sobre tu proyecto. Me encantaría escuchar tu visión y explorar cómo puedo
+              ayudarte a hacerla realidad.
+            </p>
+          </div>
         </motion.header>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto"
-        >
-          <form onSubmit={handleSubmit} className="space-y-4" aria-label="Formulario de contacto">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="name" className="block text-white font-medium mb-2 text-sm">Nombre</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Tu nombre"
-                  required
-                  autoComplete="name"
-                  className="w-full px-4 py-3 rounded-lg bg-[#16213e] border border-[#00d48e]/20 text-white placeholder-[#686878] focus:outline-none focus:border-[#00d48e]/50 focus:ring-2 focus:ring-[#00d48e]/30 transition-colors"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-white font-medium mb-2 text-sm">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="tu@email.com"
-                  required
-                  autoComplete="email"
-                  className="w-full px-4 py-3 rounded-lg bg-[#16213e] border border-[#00d48e]/20 text-white placeholder-[#686878] focus:outline-none focus:border-[#00d48e]/50 focus:ring-2 focus:ring-[#00d48e]/30 transition-colors"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-white font-medium mb-2 text-sm">Mensaje</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Escribe tu mensaje..."
-                required
-                rows={6}
-                className="w-full px-4 py-3 rounded-lg bg-[#16213e] border border-[#00d48e]/20 text-white placeholder-[#686878] focus:outline-none focus:border-[#00d48e]/50 focus:ring-2 focus:ring-[#00d48e]/30 transition-colors resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={submitted}
-              className="w-full py-3 rounded-lg bg-gradient-to-r from-[#00d48e] to-[#00b570] text-[#0f1117] font-bold hover:shadow-lg hover:shadow-[#00d48e]/40 transition-all focus:outline-none focus:ring-2 focus:ring-[#00d48e] focus:ring-offset-2 focus:ring-offset-[#0f1117] disabled:opacity-70"
-            >
-              {submitted ? '✓ Mensaje enviado' : 'Enviar Mensaje'}
-            </button>
-          </form>
-
+        <div className="grid lg:grid-cols-12 gap-10">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 pt-8 border-t border-[#00d48e]/10 flex items-center gap-3"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-4 space-y-5"
           >
-            <Mail className="w-5 h-5 text-[#00d48e]" aria-hidden="true" />
-            <div>
-              <span className="text-[#a0a8b8] text-sm">O escríbeme directamente:</span>
-              <a 
-                href="mailto:hectorcastilloperez@gmail.com" 
-                className="block text-white font-medium hover:text-[#00d48e] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00d48e] rounded px-1"
+            <div className="brutal-card bg-white p-6 rotate-[-0.6deg]">
+              <span className="w-11 h-11 flex items-center justify-center bg-[#17c49b] border-2 border-[#17171b] shadow-[3px_3px_0_0_#17171b] rounded-sm mb-4" aria-hidden="true">
+                <Mail className="w-5 h-5" />
+              </span>
+              <p className="font-mono text-xs uppercase tracking-widest text-[#57575f] mb-2">
+                Escríbeme directo
+              </p>
+              <a
+                href="mailto:hectorcastilloperez@gmail.com"
+                className="font-display text-sm uppercase tracking-wide whitespace-nowrap hover:text-[#2e5bff] underline decoration-2 underline-offset-4 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e5bff] rounded-sm"
               >
                 hectorcastilloperez@gmail.com
               </a>
             </div>
+
+            <div className="brutal-card bg-[#ff86c8] p-6 rotate-[0.6deg]">
+              <p className="font-display uppercase tracking-tight text-2xl leading-tight mb-2">
+                Respuesta en menos de 24h
+              </p>
+              <p className="font-mono text-xs uppercase tracking-widest text-[#17171b]/70">
+                Lunes a viernes · LATAM / USA / EU
+              </p>
+            </div>
           </motion.div>
-        </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-8"
+          >
+            <form onSubmit={handleSubmit} className="brutal-card bg-[#fffdf4] p-6 md:p-8 space-y-5" aria-label="Formulario de contacto">
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="name" className="block font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Tu nombre"
+                    required
+                    autoComplete="name"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="tu@email.com"
+                    required
+                    autoComplete="email"
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="message" className="block font-mono text-xs font-bold uppercase tracking-widest mb-2">
+                  Mensaje
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Cuéntame sobre tu proyecto..."
+                  required
+                  rows={6}
+                  className={`${inputClass} resize-none`}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={submitted}
+                className="brutal-btn w-full py-4 bg-[#2e5bff] text-white font-display uppercase tracking-wide text-xl rounded-sm disabled:opacity-60 disabled:pointer-events-none"
+              >
+                {submitted ? '✓ ¡Mensaje enviado!' : 'Enviar mensaje'}
+                {!submitted && <ArrowUpRight className="w-5 h-5" aria-hidden="true" />}
+              </button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
