@@ -1,11 +1,12 @@
 # Deploy Landing Page - Proxmox LXC
 
 ## Requisitos Previos
-- LXC Debian/Ubuntu
-- Domain o IP pública
+- LXC Debian/Ubuntu (CT **107**)
+- IP: **192.168.1.59**
 - Nginx
 - Node.js 20+
 - pnpm
+- PM2
 
 ---
 
@@ -16,77 +17,62 @@
 apt update && apt upgrade -y
 
 # Instalar dependencias
-apt install -y curl git nginx certbot python3-certbot-nginx
+apt install -y curl git nginx
 ```
 
 ## 2. Instalar Node.js
 
 ```bash
-# Instalar Node.js 20
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install -y nodejs
 
-# Verificar instalación
 node -v  # v20.x.x
-npm -v
 ```
 
-## 3. Instalar pnpm
+## 3. Instalar pnpm y PM2
 
 ```bash
-npm install -g pnpm
+npm install -g pnpm pm2
 pnpm -v
 ```
 
-## 4. Clonar Repositorio
+## 4. Clonar Repositorio (una sola vez)
 
 ```bash
-# Crear directorio para la app
 mkdir -p /var/www/hectorcastillo
 cd /var/www/hectorcastillo
+git clone https://github.com/Hcastilloperez/landing-page-portafolio.git landing-page
 
-# Clonar (usar tu usuario si es diferente)
-git clone https://github.com/Hcastilloperez/landing-page-portafolio.git .
-
-mv landing-page-portafolio landing-page
-
-# Instalar dependencias
+cd landing-page
 pnpm install
 ```
 
 ## 5. Build de Producción
 
 ```bash
+cd /var/www/hectorcastillo/landing-page
 pnpm build
 ```
 
-Esto genera la carpeta `.next/` con los archivos optimizados.
-
-## 6. Instalar PM2 para Gestión de Procesos
+## 6. Arrancar con PM2
 
 ```bash
-npm install -g pm2
-
-# Iniciar la app
 pm2 start pnpm --name "landing-page" -- start
-
-# Guardar configuración de auto-inicio
 pm2 startup
 pm2 save
 ```
 
 ### Comandos PM2 útiles
 ```bash
-pm2 status              # Ver estado
-pm2 logs landing-page   # Ver logs
+pm2 status               # Ver estado
+pm2 logs landing-page    # Ver logs
 pm2 restart landing-page # Reiniciar
-pm2 stop landing-page   # Detener
+pm2 stop landing-page    # Detener
 ```
 
 ## 7. Configurar Nginx
 
 ```bash
-# Crear archivo de configuración
 nano /etc/nginx/sites-available/landing-page
 ```
 
@@ -108,36 +94,52 @@ server {
 ```
 
 ```bash
-# Habilitar sitio
 ln -s /etc/nginx/sites-available/landing-page /etc/nginx/sites-enabled/
-
-# Verificar configuración
 nginx -t
-
-# Recargar Nginx
-pm2 restart landing-page
 systemctl reload nginx
 ```
 
-## 8. SSL con Let's Encrypt
+## 8. Desplegar una versión local (sin pasar por git/GitHub)
 
-```bash
-# SSL: Solo si tienes dominio. Let's Encrypt no funciona con IP pública.
-# certbot --nginx -d TU_DOMINIO
+Este es el método usado para publicar versiones que no están en `main`
+(por ejemplo, ramas de diseño experimentales). Se empaqueta el código
+fuente desde la máquina de desarrollo y se publica en el LXC.
+
+### Desde la máquina local (Windows/PowerShell)
+
+```powershell
+# Empaquetar el código fuente (excluye node_modules, .next y .git)
+tar -czf landing-src.tar.gz --exclude=node_modules --exclude=.next --exclude=.git -C "D:\Proyectos\React\02-landing-page-portafolio" .
+
+# Copiar al LXC
+scp -i "$env:USERPROFILE\.ssh\id_ed25519" landing-src.tar.gz root@192.168.1.59:/tmp/
 ```
 
-Seguir las instrucciones interactivas. Certbot renovará automáticamente.
+### En el LXC
+
+```bash
+cd /var/www/hectorcastillo/landing-page
+
+# Extraer la versión sobre el código actual
+tar -xzf /tmp/landing-src.tar.gz
+
+# Limpiar build anterior e instalar dependencias
+rm -rf .next
+pnpm install        # si pnpm se queja por el lockfile, no usar --frozen-lockfile
+
+# Build y reinicio
+pnpm build
+pm2 restart landing-page --update-env
+
+# Verificar
+curl -I http://localhost:3000
+```
 
 ## 9. Verificar Deploy
 
 ```bash
-# Reiniciar todo
-systemctl restart nginx
-pm2 restart landing-page
-
-# Verificar estado
-pm2 status
-curl -I http://localhost:3000
+curl -I http://localhost:3000      # Desde el LXC
+curl -I http://192.168.1.59        # Desde cualquier equipo de la red
 ```
 
 ---
@@ -145,21 +147,24 @@ curl -I http://localhost:3000
 ## Comandos de Mantenimiento
 
 ```bash
-# Actualizar código
-cd /var/www/landing-page
+# Actualizar código (cuando la versión está en main)
+cd /var/www/hectorcastillo/landing-page
 git pull origin main
 pnpm install
 pnpm build
 pm2 restart landing-page
 
-# Renovación automática de SSL
-certbot renew --dry-run
+# Reiniciar todo
+systemctl restart nginx
+pm2 restart landing-page
 ```
 
 ---
 
 ## Notas
-- El puerto de la app es 3000
+- El puerto de la app es **3000**
+- El proyecto vive en `/var/www/hectorcastillo/landing-page`
 - Next.js usa `.next/` para archivos compilados
 - No requiere base de datos
 - Los assets estáticos se sirven desde `.next/static/`
+- Acceso SSH: `ssh -i ~/.ssh/id_ed25519 root@192.168.1.59`

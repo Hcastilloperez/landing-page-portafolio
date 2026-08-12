@@ -3,15 +3,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Stethoscope } from 'lucide-react';
 
-const marqueeItems = [
-  'Software a medida',
-  'Agentes de IA',
-  'SaaS multi-tenant',
-  'E-commerce',
-  'Automatización',
-  'Diseño de producto',
-];
-
 function Masthead() {
   return (
     <div
@@ -201,27 +192,6 @@ export default function Hero() {
         <p className="font-mono text-[11px] text-[#6f6e67] pb-10">
           * Diseñado en Colombia, probado en producción.
         </p>
-      </div>
-
-      <div
-        className="relative border-y border-[#1a1a18]/15 py-3 overflow-hidden bg-[#fffdf8]/60"
-        aria-hidden="true"
-      >
-        <div className="marquee-track">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="flex shrink-0 items-center">
-              {marqueeItems.map((item) => (
-                <span
-                  key={`${copy}-${item}`}
-                  className="font-display italic text-xl md:text-2xl px-8 flex items-center gap-8 text-[#1a1a18]/80"
-                >
-                  {item}
-                  <span className="font-normal text-[#2e3bff]" aria-hidden="true">✦</span>
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

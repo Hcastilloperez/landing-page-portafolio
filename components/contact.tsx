@@ -63,13 +63,13 @@ export default function Contact() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-4 space-y-8"
+            className="lg:col-span-5 space-y-8"
           >
             <div>
               <span className="eyebrow text-[#6f6e67] mb-3 block">Escríbeme directo</span>
               <a
                 href="mailto:hectorcastilloperez@gmail.com"
-                className="font-display text-2xl md:text-3xl tracking-tight break-words hover:text-[#2e3bff] hover:italic transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                className="block font-display text-base sm:text-lg md:text-2xl lg:text-xl tracking-tight whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
               >
                 hectorcastilloperez@gmail.com
               </a>
@@ -97,7 +97,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-8"
+            className="lg:col-span-7"
           >
             <form
               onSubmit={handleSubmit}
