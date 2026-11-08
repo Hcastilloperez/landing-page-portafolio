@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { GitBranch, Share2, MessageCircle, Mail, ArrowUpRight } from 'lucide-react';
 import { legalLinks, products, site, whatsappUrl } from '@/lib/site';
 
@@ -64,13 +65,13 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
             className="sm:col-span-2 lg:col-span-1"
           >
-            <a
+            <Link
               href="/"
               className="inline-block font-display text-3xl font-medium tracking-tight mb-4 focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
               aria-label={`${site.name} — Inicio`}
             >
               Héctor <em className="italic font-normal">Castillo</em>
-            </a>
+            </Link>
             <p className="font-display text-lg mb-2">{site.role}</p>
             <p className="text-[#6f6e67] text-sm leading-relaxed max-w-xs mb-5">
               Software a medida + IA para empresas que toman decisiones con tecnología.
