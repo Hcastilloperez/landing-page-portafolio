@@ -9,7 +9,8 @@ const navItems = [
   { label: 'Servicios', href: '#services' },
   { label: 'Proceso', href: '#process' },
   { label: 'Portafolio', href: '#portfolio' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Productos', href: '#products' },
+  { label: 'WhatsApp', href: '#whatsapp' },
   { label: 'Contacto', href: '#contact' },
 ];
 
@@ -57,7 +58,7 @@ export default function Navigation() {
           <span className="w-2 h-2 bg-[#2e3bff] inline-block transition-transform group-hover:rotate-45" aria-hidden="true" />
         </a>
 
-        <ul className="hidden md:flex items-center gap-7" role="list">
+        <ul className="hidden lg:flex items-center gap-5 xl:gap-7" role="list">
           {navItems.map((item, index) => (
             <li key={item.href}>
               <a
@@ -79,7 +80,7 @@ export default function Navigation() {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex btn-editorial px-5 py-2.5"
+          className="hidden lg:inline-flex btn-editorial px-5 py-2.5"
         >
           Escríbeme
           <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -89,7 +90,7 @@ export default function Navigation() {
           onClick={toggleMenu}
           onBlur={() => setFocusedIndex(null)}
           onFocus={() => setFocusedIndex(-1)}
-          className="md:hidden p-2 -mr-2 hover:bg-[#1a1a18]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+          className="lg:hidden p-2 -mr-2 hover:bg-[#1a1a18]/5 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
           aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
@@ -106,7 +107,7 @@ export default function Navigation() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22 }}
-            className="md:hidden overflow-hidden border-t border-[#1a1a18]/15 bg-[#f4f0e7]"
+            className="lg:hidden overflow-hidden border-t border-[#1a1a18]/15 bg-[#f4f0e7]"
             role="dialog"
             aria-modal="true"
             aria-label="Menú móvil"

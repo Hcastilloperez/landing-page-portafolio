@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { GitBranch, Share2, MessageCircle, Mail, ArrowUpRight } from 'lucide-react';
+import { legalLinks, products, site, whatsappUrl } from '@/lib/site';
 
 const marqueeItems = [
   'Software a medida',
@@ -19,16 +20,17 @@ export default function Footer() {
     { icon: GitBranch, href: 'https://github.com/Hcastilloperez', label: 'GitHub' },
     { icon: Share2, href: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: MessageCircle, href: 'https://twitter.com', label: 'X/Twitter' },
-    { icon: Mail, href: 'mailto:hectorcastilloperez@gmail.com', label: 'Email' },
+    { icon: Mail, href: `mailto:${site.email}`, label: 'Email' },
   ];
 
   const quickLinks = [
-    { href: '#about', label: 'Sobre Mí' },
-    { href: '#services', label: 'Servicios' },
-    { href: '#process', label: 'Proceso' },
-    { href: '#portfolio', label: 'Portafolio' },
-    { href: '#faq', label: 'FAQ' },
-    { href: '#contact', label: 'Contacto' },
+    { href: '/#about', label: 'Sobre Mí' },
+    { href: '/#services', label: 'Servicios' },
+    { href: '/#process', label: 'Proceso' },
+    { href: '/#portfolio', label: 'Portafolio' },
+    { href: '/#products', label: 'Productos' },
+    { href: '/#whatsapp', label: 'WhatsApp' },
+    { href: '/#contact', label: 'Contacto' },
   ];
 
   return (
@@ -55,50 +57,46 @@ export default function Footer() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-14">
-        <div className="grid md:grid-cols-3 gap-10 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="sm:col-span-2 lg:col-span-1"
           >
-            <p className="font-display text-3xl font-medium tracking-tight mb-4">
+            <a
+              href="/"
+              className="inline-block font-display text-3xl font-medium tracking-tight mb-4 focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+              aria-label={`${site.name} — Inicio`}
+            >
               Héctor <em className="italic font-normal">Castillo</em>
-            </p>
-            <p className="font-display text-lg mb-2">Ingeniero de Sistemas & Full Stack</p>
-            <p className="text-[#6f6e67] text-sm leading-relaxed max-w-xs">
+            </a>
+            <p className="font-display text-lg mb-2">{site.role}</p>
+            <p className="text-[#6f6e67] text-sm leading-relaxed max-w-xs mb-5">
               Software a medida + IA para empresas que toman decisiones con tecnología.
             </p>
-          </motion.div>
 
-          <motion.nav
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            aria-label="Enlaces rápidos"
-          >
-            <h4 className="eyebrow text-[10px] text-[#2e3bff] mb-4">Enlaces</h4>
-            <ul className="space-y-2.5" role="list">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="inline-flex items-center gap-1.5 font-display text-lg hover:italic hover:text-[#2e3bff] transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.nav>
+            <address className="not-italic text-sm leading-relaxed space-y-1.5">
+              <p className="eyebrow text-[10px] text-[#6f6e67]">{site.location}</p>
+              <p>
+                <a
+                  href={`tel:${site.phone.tel}`}
+                  className="hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                >
+                  {site.phone.display}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="break-all hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                >
+                  {site.email}
+                </a>
+              </p>
+            </address>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h4 className="eyebrow text-[10px] text-[#2e3bff] mb-4">Sígueme</h4>
-            <div className="flex gap-3" role="list" aria-label="Redes sociales">
+            <div className="flex gap-3 mt-6" role="list" aria-label="Redes sociales">
               {socials.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -118,27 +116,114 @@ export default function Footer() {
               })}
             </div>
           </motion.div>
+
+          <motion.nav
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            aria-label="Enlaces rápidos"
+          >
+            <h2 className="eyebrow text-[10px] text-[#2e3bff] mb-4">Enlaces</h2>
+            <ul className="space-y-2.5" role="list">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="inline-flex items-center gap-1.5 font-display text-lg hover:italic hover:text-[#2e3bff] transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+
+          <motion.nav
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            aria-label="Productos"
+          >
+            <h2 className="eyebrow text-[10px] text-[#2e3bff] mb-4">Productos</h2>
+            <ul className="space-y-2.5" role="list">
+              {products.map((product) => (
+                <li key={product.name}>
+                  <a
+                    href={product.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-display text-lg hover:italic hover:text-[#2e3bff] transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                  >
+                    {product.name}
+                    <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-display text-lg hover:italic hover:text-[#2e3bff] transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                >
+                  WhatsApp
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </a>
+              </li>
+            </ul>
+          </motion.nav>
+
+          <motion.nav
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            aria-label="Legal"
+          >
+            <h2 className="eyebrow text-[10px] text-[#2e3bff] mb-4">Legal</h2>
+            <ul className="space-y-2.5" role="list">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="inline-flex items-center gap-1.5 font-display text-lg hover:italic hover:text-[#2e3bff] transition-all focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="text-[#6f6e67] text-xs leading-relaxed mt-5">
+              Recordatorios por WhatsApp solo con consentimiento previo. Responde BAJA para
+              detenerlos.
+            </p>
+          </motion.nav>
         </div>
 
         <div className="pt-8 border-t border-[#1a1a18]/15 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="eyebrow text-[10px] text-[#6f6e67]">
-            © {currentYear} Héctor Castillo. Todos los derechos reservados.
+            © {currentYear} {site.name}. Todos los derechos reservados.
           </p>
           <nav
-            aria-label="Contacto"
-            className="flex items-center gap-6 eyebrow text-[10px] text-[#6f6e67]"
+            aria-label="Contacto directo"
+            className="flex flex-wrap items-center justify-center gap-4 eyebrow text-[10px] text-[#6f6e67]"
           >
             <a
-              href="mailto:hectorcastilloperez@gmail.com"
+              href={`tel:${site.phone.tel}`}
+              className="hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+            >
+              {site.phone.display}
+            </a>
+            <span aria-hidden="true">·</span>
+            <a
+              href={`mailto:${site.email}`}
               className="hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
             >
               Email
             </a>
             <span aria-hidden="true">·</span>
             <a
-              href="https://hectorcastillo.net"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={site.url}
               className="hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
             >
               hectorcastillo.net

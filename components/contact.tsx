@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useState, useCallback, type FormEvent } from 'react';
+import { site, whatsappUrl } from '@/lib/site';
 
 function SectionHeader({ index, label }: { index: string; label: string }) {
   return (
@@ -16,20 +17,42 @@ function SectionHeader({ index, label }: { index: string; label: string }) {
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [error, setError] = useState('');
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
 
-  const handleSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
-  }, []);
+  const handleSubmit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      setStatus('sending');
+      setError('');
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'No se pudo enviar el mensaje.');
+        }
+
+        setStatus('sent');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 4000);
+      } catch (err) {
+        setStatus('error');
+        setError(err instanceof Error ? err.message : 'Error al enviar. Intenta de nuevo.');
+      }
+    },
+    [formData]
+  );
 
   const inputClass =
     'w-full bg-transparent border-b border-[#1a1a18]/25 py-3 text-[#1a1a18] placeholder-[#6f6e67]/70 focus:outline-none focus:border-[#2e3bff] transition-colors';
@@ -43,7 +66,7 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <SectionHeader index="06" label="Contacto" />
+          <SectionHeader index="07" label="Contacto" />
           <div className="grid lg:grid-cols-2 gap-6 items-end">
             <h2
               id="contact-title"
@@ -66,14 +89,47 @@ export default function Contact() {
             className="lg:col-span-5 space-y-8"
           >
             <div>
-              <span className="eyebrow text-[#6f6e67] mb-3 block">Escríbeme directo</span>
-              <a
-                href="mailto:hectorcastilloperez@gmail.com"
-                className="block font-display text-base sm:text-lg md:text-2xl lg:text-xl tracking-tight whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
-              >
-                hectorcastilloperez@gmail.com
-              </a>
-              <div className="mt-5 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+              <span className="eyebrow text-[#6f6e67] mb-3 block">Datos de contacto</span>
+              <address className="not-italic space-y-4">
+                <div>
+                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Nombre</span>
+                  <p className="font-display text-2xl tracking-tight">{site.name}</p>
+                </div>
+                <div>
+                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Ubicación</span>
+                  <p className="font-display text-2xl tracking-tight">{site.location}</p>
+                </div>
+                <div>
+                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Teléfono y WhatsApp</span>
+                  <a
+                    href={`tel:${site.phone.tel}`}
+                    className="font-display text-2xl tracking-tight hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                  >
+                    {site.phone.display}
+                  </a>
+                </div>
+                <div>
+                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Correo</span>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="block font-display text-base sm:text-lg md:text-2xl lg:text-xl tracking-tight break-all hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                  >
+                    {site.email}
+                  </a>
+                </div>
+              </address>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-editorial-text text-[11px]"
+                >
+                  Escribir por WhatsApp
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </a>
+              </div>
+              <div className="mt-6 h-px bg-[#1a1a18]/15" aria-hidden="true" />
             </div>
 
             <div>
@@ -163,16 +219,30 @@ export default function Contact() {
                 />
               </div>
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <p className="font-mono text-[11px] text-[#6f6e67]">
-                  * Datos solo para responderte. Nada de spam.
-                </p>
+                <div className="flex items-center gap-2">
+                  {status === 'error' && (
+                    <p className="font-mono text-[11px] text-red-600" role="alert">{error}</p>
+                  )}
+                  {status === 'sent' && (
+                    <p className="font-mono text-[11px] text-[#2e3bff]" role="status">✓ ¡Mensaje enviado!</p>
+                  )}
+                  {status !== 'sent' && status !== 'error' && (
+                    <p className="font-mono text-[11px] text-[#6f6e67]">
+                      * Datos solo para responderte, según la{' '}
+                      <a href="/privacidad" className="underline underline-offset-2 hover:text-[#2e3bff]">
+                        política de privacidad
+                      </a>
+                      .
+                    </p>
+                  )}
+                </div>
                 <button
                   type="submit"
-                  disabled={submitted}
+                  disabled={status === 'sending' || status === 'sent'}
                   className="btn-editorial btn-editorial-accent disabled:opacity-60 disabled:pointer-events-none"
                 >
-                  {submitted ? '✓ ¡Mensaje enviado!' : 'Enviar mensaje'}
-                  {!submitted && <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />}
+                  {status === 'sending' ? 'Enviando...' : status === 'sent' ? '✓ ¡Mensaje enviado!' : 'Enviar mensaje'}
+                  {status !== 'sending' && status !== 'sent' && <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />}
                 </button>
               </div>
             </form>

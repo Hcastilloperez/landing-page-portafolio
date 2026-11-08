@@ -97,24 +97,7 @@ export default function About() {
               «La buena arquitectura se siente. La mala se paga después.»
             </motion.blockquote>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="grid grid-cols-3 divide-x divide-[#1a1a18]/15 border-y border-[#1a1a18]/15"
-            >
-              {[
-                ['+5', 'años en software'],
-                ['16', 'proyectos entregados'],
-                ['3', 'regiones con clientes'],
-              ].map(([value, label]) => (
-                <div key={label} className="px-4 py-4">
-                  <p className="font-display text-3xl text-[#2e3bff] leading-none">{value}</p>
-                  <p className="eyebrow text-[10px] text-[#6f6e67] mt-2">{label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
+            </div>
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}

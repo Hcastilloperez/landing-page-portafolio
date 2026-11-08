@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowUpRight, Code2, Zap, Sparkles, Stethoscope } from 'lucide-react';
+import { ArrowUpRight, Code2, Zap, Stethoscope } from 'lucide-react';
 
 function CaptionBar({ url, index, color }: { url: string; index: string; color: string }) {
   return (
@@ -71,7 +71,7 @@ export default function Portfolio() {
     {
       id: 1,
       index: 'A.',
-      title: 'Barber Control',
+      title: 'BarberControl',
       category: 'SaaS',
       description: 'Sistema integral para barberías que automatiza gestión de clientes, barberos, reservas y KPIs.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
@@ -80,7 +80,6 @@ export default function Portfolio() {
       link: 'https://barbercontrol.hectorcastillo.net/',
       color: '#2e3bff',
       icon: Code2,
-      isPersonal: false,
     },
     {
       id: 2,
@@ -94,7 +93,6 @@ export default function Portfolio() {
       link: 'https://soter.hectorcastillo.net',
       color: '#e03c31',
       icon: Zap,
-      isPersonal: false,
     },
     {
       id: 3,
@@ -108,20 +106,6 @@ export default function Portfolio() {
       link: 'https://medicitas.hectorcastillo.net/',
       color: '#0ea5e9',
       icon: Stethoscope,
-      isPersonal: false,
-    },
-    {
-      id: 4,
-      index: 'D.',
-      title: 'Athena',
-      category: 'IA Personal',
-      description: 'Asistente IA personal inspirado en Jarvis de Iron Man. Laboratorio de experiencias en IA conversacional y automatización.',
-      tags: ['AI', 'NLP', 'Automation', 'Integration'],
-      image: '/athena.png',
-      mock: false,
-      color: '#2e3bff',
-      icon: Sparkles,
-      isPersonal: true,
     },
   ];
 
@@ -186,14 +170,6 @@ export default function Portfolio() {
                     >
                       {project.category}
                     </span>
-                    {project.isPersonal && (
-                      <span
-                        className="absolute top-3 right-3 eyebrow text-[10px] bg-[#e03c31] text-white px-2 py-1"
-                        aria-hidden="true"
-                      >
-                        Personal
-                      </span>
-                    )}
                   </div>
 
                   <div className="p-6 md:p-8 flex flex-col flex-grow">
@@ -223,7 +199,7 @@ export default function Portfolio() {
                       ))}
                     </ul>
 
-                    {!project.isPersonal && project.link && (
+                    {project.link && (
                       <a
                         href={project.link}
                         target="_blank"

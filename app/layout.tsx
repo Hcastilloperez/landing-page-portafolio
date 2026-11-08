@@ -21,6 +21,14 @@ const plexMono = IBM_Plex_Mono({
   variable: '--font-plex-mono',
 })
 
+/**
+ * Código de verificación de dominio que entrega Meta (Business Manager →
+ * Configuración del dominio → Verificación). Se define en .env.local como
+ * META_DOMAIN_VERIFICATION y se inyecta como <meta name="facebook-domain-verification">.
+ * Si la variable no existe, el sitio se construye sin la etiqueta.
+ */
+const metaDomainVerification = process.env.META_DOMAIN_VERIFICATION?.trim()
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://hectorcastillo.net'),
   title: {
@@ -28,6 +36,14 @@ export const metadata: Metadata = {
     template: '%s | Héctor Castillo',
   },
   description: 'Desarrollador Full Stack especializado en software a medida, IA y soluciones empresariales. Código con propósito. +5 años de experiencia.',
+  applicationName: 'Héctor Castillo',
+  category: 'technology',
+  alternates: {
+    canonical: '/',
+  },
+  verification: metaDomainVerification
+    ? { other: { 'facebook-domain-verification': metaDomainVerification } }
+    : undefined,
   keywords: [
     'desarrollador full stack',
     'software a medida',

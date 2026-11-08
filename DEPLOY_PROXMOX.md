@@ -10,6 +10,83 @@
 
 ---
 
+## ⚡ Deploy instantáneo (método recomendado)
+
+> El LXC solo tiene **512 MiB RAM y 1 vCPU**. Compilar Next.js 16 allí tarda ~10 min
+> y se cuelga por swap. La solución es **compilar en la máquina local (2s) y subir
+> solo el build standalone**.
+
+Desde la máquina local (Windows/PowerShell):
+
+```powershell
+# Compila localmente, empaqueta .next/standalone, lo sube y reinicia PM2
+.\deploy.ps1
+```
+
+Qué hace `deploy.ps1`:
+1. `pnpm build` local (usa `output: 'standalone'` en `next.config.mjs`)
+2. Copia `.next/static` y `public/` dentro del standalone
+3. Empaqueta `standalone/` (~50 MB) y lo sube por scp
+4. En el LXC: `pm2 delete` → extrae en `.next/standalone` → `pm2 start server.js` → verifica
+
+El servidor **nunca compila**: solo descomprime y reinicia. Deploy total ~15s.
+
+> Nota: el standalone se compila en Windows y corre en Linux porque el output de
+> Next.js es neutral de plataforma. `next.config.mjs` define `output: 'standalone'`.
+
+## Setup inicial (una sola vez)
+
+Si el servidor se reconfigura desde cero:
+
+```bash
+# Preparación
+apt update && apt upgrade -y
+apt install -y curl git nginx
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+npm install -g pnpm pm2
+```
+
+### En el LXC: PM2 con standalone
+
+```bash
+mkdir -p /var/www/hectorcastillo/landing-page
+# (opcional) clonar el repo para tener el código fuente
+cd /var/www/hectorcastillo/landing-page
+# El deploy de .next/standalone se hace con deploy.ps1 desde la máquina local
+```
+
+## Configurar Nginx
+
+```bash
+nano /etc/nginx/sites-available/landing-page
+```
+
+```nginx
+server {
+    listen 80;
+    server_name 192.168.1.59;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+```bash
+ln -s /etc/nginx/sites-available/landing-page /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
+```
+
+---
+
 ## 1. Preparación del Sistema
 
 ```bash
@@ -99,43 +176,7 @@ nginx -t
 systemctl reload nginx
 ```
 
-## 8. Desplegar una versión local (sin pasar por git/GitHub)
-
-Este es el método usado para publicar versiones que no están en `main`
-(por ejemplo, ramas de diseño experimentales). Se empaqueta el código
-fuente desde la máquina de desarrollo y se publica en el LXC.
-
-### Desde la máquina local (Windows/PowerShell)
-
-```powershell
-# Empaquetar el código fuente (excluye node_modules, .next y .git)
-tar -czf landing-src.tar.gz --exclude=node_modules --exclude=.next --exclude=.git -C "D:\Proyectos\React\02-landing-page-portafolio" .
-
-# Copiar al LXC
-scp -i "$env:USERPROFILE\.ssh\id_ed25519" landing-src.tar.gz root@192.168.1.59:/tmp/
-```
-
-### En el LXC
-
-```bash
-cd /var/www/hectorcastillo/landing-page
-
-# Extraer la versión sobre el código actual
-tar -xzf /tmp/landing-src.tar.gz
-
-# Limpiar build anterior e instalar dependencias
-rm -rf .next
-pnpm install        # si pnpm se queja por el lockfile, no usar --frozen-lockfile
-
-# Build y reinicio
-pnpm build
-pm2 restart landing-page --update-env
-
-# Verificar
-curl -I http://localhost:3000
-```
-
-## 9. Verificar Deploy
+## Verificar Deploy
 
 ```bash
 curl -I http://localhost:3000      # Desde el LXC
@@ -147,16 +188,16 @@ curl -I http://192.168.1.59        # Desde cualquier equipo de la red
 ## Comandos de Mantenimiento
 
 ```bash
-# Actualizar código (cuando la versión está en main)
-cd /var/www/hectorcastillo/landing-page
-git pull origin main
-pnpm install
-pnpm build
+# Reiniciar solo la app
 pm2 restart landing-page
 
 # Reiniciar todo
 systemctl restart nginx
 pm2 restart landing-page
+
+# Ver estado / logs
+pm2 status
+pm2 logs landing-page
 ```
 
 ---
@@ -164,7 +205,10 @@ pm2 restart landing-page
 ## Notas
 - El puerto de la app es **3000**
 - El proyecto vive en `/var/www/hectorcastillo/landing-page`
-- Next.js usa `.next/` para archivos compilados
+- El runtime corre como `node .next/standalone/server.js` (no `next start`)
+- La RAM del proceso es ~70 MB (vs 90+ MB con `next start`)
+- El build se hace **localmente**; el servidor solo descomprime y reinicia
+- La variable `RESEND_API_KEY` viaja dentro del standalone (`.env.local` copiado)
 - No requiere base de datos
-- Los assets estáticos se sirven desde `.next/static/`
 - Acceso SSH: `ssh -i ~/.ssh/id_ed25519 root@192.168.1.59`
+- Si el LXC se queda colgado en un deploy: `pkill -f 'next build'` en el servidor

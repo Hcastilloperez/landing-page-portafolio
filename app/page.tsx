@@ -4,7 +4,8 @@ import About from '@/components/about';
 import Services from '@/components/services';
 import Process from '@/components/process';
 import Portfolio from '@/components/portfolio';
-import FAQ from '@/components/faq';
+import Products from '@/components/products';
+import WhatsAppConsent from '@/components/whatsapp-consent';
 import Contact from '@/components/contact';
 import Footer from '@/components/footer';
 
@@ -18,7 +19,8 @@ export default function Page() {
         <Services />
         <Process />
         <Portfolio />
-        <FAQ />
+        <Products />
+        <WhatsAppConsent />
         <Contact />
       </main>
       <Footer />
