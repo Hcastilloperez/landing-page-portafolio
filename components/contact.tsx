@@ -4,16 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useState, useCallback, type FormEvent } from 'react';
 import { site, whatsappUrl } from '@/lib/site';
-
-function SectionHeader({ index, label }: { index: string; label: string }) {
-  return (
-    <div className="flex items-baseline gap-4 mb-5">
-      <span className="font-display italic text-2xl text-[#2e3bff]" aria-hidden="true">{index}</span>
-      <span className="eyebrow text-[#6f6e67]">{label}</span>
-      <div className="flex-1 h-px bg-[#1a1a18]/15" aria-hidden="true" />
-    </div>
-  );
-}
+import SectionHeader from '@/components/section-header';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -55,7 +46,7 @@ export default function Contact() {
   );
 
   const inputClass =
-    'w-full bg-transparent border-b border-[#1a1a18]/25 py-3 text-[#1a1a18] placeholder-[#6f6e67]/70 focus:outline-none focus:border-[#2e3bff] transition-colors';
+    'w-full bg-transparent border-b border-ink/25 py-3 text-ink placeholder-soft/70 focus:outline-none focus:border-signal transition-colors';
 
   return (
     <section id="contact" className="py-24 md:py-32 relative" aria-labelledby="contact-title">
@@ -72,9 +63,9 @@ export default function Contact() {
               id="contact-title"
               className="font-display font-medium tracking-tight text-5xl md:text-7xl leading-[1.02]"
             >
-              Hablemos<em className="italic font-normal text-[#2e3bff]">.</em>
+              Hablemos<em className="font-normal text-signal">.</em>
             </h2>
-            <p className="text-lg text-[#6f6e67] leading-relaxed">
+            <p className="text-lg text-soft leading-relaxed">
               Cuéntame sobre tu proyecto. Me encantaría escuchar tu visión y explorar cómo puedo
               ayudarte a hacerla realidad.
             </p>
@@ -89,30 +80,30 @@ export default function Contact() {
             className="lg:col-span-5 space-y-8"
           >
             <div>
-              <span className="eyebrow text-[#6f6e67] mb-3 block">Datos de contacto</span>
+              <span className="eyebrow text-soft mb-3 block">Datos de contacto</span>
               <address className="not-italic space-y-4">
                 <div>
-                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Nombre</span>
+                  <span className="eyebrow text-[10px] text-soft block mb-1">Nombre</span>
                   <p className="font-display text-2xl tracking-tight">{site.name}</p>
                 </div>
                 <div>
-                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Ubicación</span>
+                  <span className="eyebrow text-[10px] text-soft block mb-1">Ubicación</span>
                   <p className="font-display text-2xl tracking-tight">{site.location}</p>
                 </div>
                 <div>
-                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Teléfono y WhatsApp</span>
+                  <span className="eyebrow text-[10px] text-soft block mb-1">Teléfono y WhatsApp</span>
                   <a
                     href={`tel:${site.phone.tel}`}
-                    className="font-display text-2xl tracking-tight hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                    className="font-display text-2xl tracking-tight hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal rounded-sm"
                   >
                     {site.phone.display}
                   </a>
                 </div>
                 <div>
-                  <span className="eyebrow text-[10px] text-[#6f6e67] block mb-1">Correo</span>
+                  <span className="eyebrow text-[10px] text-soft block mb-1">Correo</span>
                   <a
                     href={`mailto:${site.email}`}
-                    className="block font-display text-base sm:text-lg md:text-2xl lg:text-xl tracking-tight break-all hover:text-[#2e3bff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2e3bff] rounded-sm"
+                    className="block font-display text-base sm:text-lg md:text-2xl lg:text-xl tracking-tight break-all hover:text-signal transition-colors focus:outline-none focus:ring-2 focus:ring-signal rounded-sm"
                   >
                     {site.email}
                   </a>
@@ -129,22 +120,22 @@ export default function Contact() {
                   <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
               </div>
-              <div className="mt-6 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+              <div className="mt-6 h-px bg-ink/15" aria-hidden="true" />
             </div>
 
             <div>
-              <span className="eyebrow text-[#6f6e67] mb-3 block">Disponibilidad</span>
+              <span className="eyebrow text-soft mb-3 block">Disponibilidad</span>
               <p className="font-display text-2xl tracking-tight">
                 Respuesta en{' '}
-                <em className="italic font-normal text-[#2e3bff]">menos de 24h</em>
+                <em className="font-normal text-signal">menos de 24h</em>
               </p>
-              <p className="text-[#6f6e67] mt-2 text-sm">
+              <p className="text-soft mt-2 text-sm">
                 Lunes a viernes · LATAM / USA / EU
               </p>
-              <div className="mt-5 h-px bg-[#1a1a18]/15" aria-hidden="true" />
+              <div className="mt-5 h-px bg-ink/15" aria-hidden="true" />
             </div>
 
-            <blockquote className="font-display italic text-2xl leading-snug">
+            <blockquote className="font-display text-2xl leading-snug">
               «El mejor momento para empezar fue ayer. El segundo mejor es hoy.»
             </blockquote>
           </motion.div>
@@ -157,14 +148,14 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="border border-[#1a1a18]/20 bg-[#fffdf8] p-8 md:p-10 space-y-8"
+              className="border border-ink/20 bg-panel p-8 md:p-10 space-y-8"
               aria-label="Formulario de contacto"
             >
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block eyebrow text-[10px] text-[#6f6e67] mb-1"
+                    className="block eyebrow text-[10px] text-soft mb-1"
                   >
                     Nombre
                   </label>
@@ -183,7 +174,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block eyebrow text-[10px] text-[#6f6e67] mb-1"
+                    className="block eyebrow text-[10px] text-soft mb-1"
                   >
                     Email
                   </label>
@@ -203,7 +194,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block eyebrow text-[10px] text-[#6f6e67] mb-1"
+                  className="block eyebrow text-[10px] text-soft mb-1"
                 >
                   Mensaje
                 </label>
@@ -224,12 +215,12 @@ export default function Contact() {
                     <p className="font-mono text-[11px] text-red-600" role="alert">{error}</p>
                   )}
                   {status === 'sent' && (
-                    <p className="font-mono text-[11px] text-[#2e3bff]" role="status">✓ ¡Mensaje enviado!</p>
+                    <p className="font-mono text-[11px] text-signal" role="status">✓ ¡Mensaje enviado!</p>
                   )}
                   {status !== 'sent' && status !== 'error' && (
-                    <p className="font-mono text-[11px] text-[#6f6e67]">
+                    <p className="font-mono text-[11px] text-soft">
                       * Datos solo para responderte, según la{' '}
-                      <a href="/privacidad" className="underline underline-offset-2 hover:text-[#2e3bff]">
+                      <a href="/privacidad" className="underline underline-offset-2 hover:text-signal">
                         política de privacidad
                       </a>
                       .

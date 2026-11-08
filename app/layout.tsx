@@ -1,24 +1,17 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, DM_Sans, IBM_Plex_Mono } from 'next/font/google'
+import { Geist, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const fraunces = Fraunces({
+const geist = Geist({
   subsets: ['latin'],
-  style: ['normal', 'italic'],
-  variable: '--font-fraunces',
+  variable: '--font-geist',
 })
 
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-dm-sans',
-})
-
-const plexMono = IBM_Plex_Mono({
+const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-plex-mono',
+  variable: '--font-jetbrains',
 })
 
 /**
@@ -35,7 +28,7 @@ export const metadata: Metadata = {
     default: 'Héctor Castillo | Full Stack Developer & Software Engineer',
     template: '%s | Héctor Castillo',
   },
-  description: 'Desarrollador Full Stack especializado en software a medida, IA y soluciones empresariales. Código con propósito. +5 años de experiencia.',
+  description: 'Desarrollador Full Stack especializado en software a medida, IA y soluciones empresariales. SaaS en producción para salud y barberías.',
   applicationName: 'Héctor Castillo',
   category: 'technology',
   alternates: {
@@ -58,9 +51,9 @@ export const metadata: Metadata = {
     'empresas',
     'Colombia',
   ],
-  authors: [{ name: 'Héctor Castillo' }],
-  creator: 'Héctor Castillo',
-  publisher: 'Héctor Castillo',
+  authors: [{ name: 'Héctor Rafael Castillo Pérez' }],
+  creator: 'Héctor Rafael Castillo Pérez',
+  publisher: 'Héctor Rafael Castillo Pérez',
   openGraph: {
     type: 'website',
     locale: 'es_CO',
@@ -101,8 +94,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
-  themeColor: '#f4f0e7',
+  colorScheme: 'dark',
+  themeColor: '#0c0d0b',
   width: 'device-width',
   initialScale: 1,
 }
@@ -115,12 +108,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${fraunces.variable} ${dmSans.variable} ${plexMono.variable}`}
+      className={`${geist.variable} ${jetbrains.variable}`}
     >
-      <body className="font-sans bg-[#f4f0e7] text-[#1a1a18]">
+      <body className="font-sans bg-paper text-ink">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#1a1a18] focus:text-[#f4f0e7] focus:rounded-none focus:font-bold"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-signal focus:text-paper focus:rounded-none focus:font-bold"
         >
           Saltar al contenido principal
         </a>

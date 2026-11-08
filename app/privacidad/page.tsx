@@ -5,7 +5,7 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Política de privacidad',
   description:
-    'Qué datos personales trata Héctor Castillo en hectorcastillo.net, MediCitas y BarberControl, para qué los usa y cómo ejercer tus derechos.',
+    'Qué datos personales trata Héctor Rafael Castillo Pérez en hectorcastillo.net, MediCitas y BarberControl, para qué los usa y cómo ejercer tus derechos.',
   alternates: { canonical: '/privacidad' },
   openGraph: {
     title: 'Política de privacidad | Héctor Castillo',

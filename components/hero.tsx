@@ -1,197 +1,139 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Stethoscope } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { site } from '@/lib/site';
 
-function Masthead() {
+const live = [
+  { name: 'MediCitas', kind: 'Agenda médica', host: 'medicitas.hectorcastillo.net', href: 'https://medicitas.hectorcastillo.net/' },
+  { name: 'BarberControl', kind: 'Gestión de barberías', host: 'barbercontrol.hectorcastillo.net', href: 'https://barbercontrol.hectorcastillo.net/' },
+  { name: 'Soter', kind: 'Seguridad empresarial', host: 'soter.hectorcastillo.net', href: 'https://soter.hectorcastillo.net' },
+];
+
+const fade = (delay: number) => ({
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay },
+});
+
+function CircuitTrace() {
   return (
-    <div
-      className="grid grid-cols-1 sm:grid-cols-3 border-y border-[#1a1a18]/15 divide-y sm:divide-y-0 sm:divide-x divide-[#1a1a18]/15"
+    <svg
+      className="absolute right-0 top-0 h-full w-[60%] pointer-events-none hidden md:block opacity-40 [mask-image:linear-gradient(to_right,transparent,#000_45%)]"
+      viewBox="0 0 800 600"
+      fill="none"
+      preserveAspectRatio="xMaxYMin slice"
       aria-hidden="true"
     >
-      <p className="eyebrow text-[#6f6e67] py-3">HE. — Portafolio</p>
-      <p className="eyebrow text-[#6f6e67] py-3 sm:px-4">
-        Ingeniero de Sistemas <span className="text-[#1a1a18]">·</span> Software Engineer
-      </p>
-      <p className="eyebrow text-[#6f6e67] py-3 sm:px-4">Colombia / 2026</p>
-    </div>
-  );
-}
-
-function FeaturedCard() {
-  return (
-    <div className="relative border border-[#1a1a18]/20 bg-[#fffdf8]">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-[#1a1a18]/15">
-        <span className="eyebrow text-[#1a1a18]">Último lanzamiento</span>
-        <span className="eyebrow text-[#2e3bff]">2026</span>
-      </div>
-
-      <div className="px-5 py-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 flex items-center justify-center bg-[#0ea5e9] text-[#1a1a18] rounded-full" aria-hidden="true">
-            <Stethoscope className="w-4 h-4" />
-          </span>
-          <div>
-            <p className="font-display text-xl font-semibold leading-none">MediCitas</p>
-            <p className="eyebrow text-[#6f6e67] mt-1.5">SaaS · Healthtech</p>
-          </div>
-        </div>
-
-        <div className="mb-5" aria-hidden="true">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="eyebrow text-[#6f6e67]">Agenda</span>
-            <span className="eyebrow text-[#6f6e67]">Mar 4</span>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="col-span-2 space-y-1.5">
-              {[
-                ['08:00', '82%'],
-                ['08:20', '58%'],
-                ['09:00', '76%'],
-              ].map(([time, w]) => (
-                <div key={time} className="flex items-center gap-2">
-                  <span className="font-mono text-[10px] text-[#6f6e67] w-9">{time}</span>
-                  <span
-                    className="h-2 bg-[#0ea5e9]/70"
-                    style={{ width: w }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="space-y-1.5">
-              {[
-                ['Hoy', '8'],
-                ['Nuevos', '+3'],
-              ].map(([k, v]) => (
-                <div key={k} className="border border-[#1a1a18]/20 px-2 py-1.5">
-                  <p className="eyebrow text-[10px] text-[#6f6e67]">{k}</p>
-                  <p className="font-display text-lg leading-none">{v}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <a
-          href="https://medicitas.hectorcastillo.net/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-editorial-text text-[11px]"
-          aria-label="Ver proyecto MediCitas (se abre en nueva pestaña)"
-        >
-          Ver proyecto
-          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-        </a>
-      </div>
-    </div>
+      <defs>
+        <linearGradient id="trace-fade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#ff5b1f" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#ff5b1f" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#ff5b1f" stopOpacity="0.15" />
+        </linearGradient>
+      </defs>
+      <g stroke="url(#trace-fade)" strokeWidth="1.25" strokeLinecap="square">
+        <path d="M0 120 H260 L320 180 H560 L620 120 H800" />
+        <path d="M120 260 H340 L400 320 H640 L700 260 H800" className="trace-run" />
+        <path d="M0 420 H200 L260 360 H480 L540 420 H800" />
+        <path d="M300 0 V70 L360 130 V240" />
+        <path d="M600 600 V500 L660 440 V330" className="trace-run" />
+      </g>
+      <g fill="#ff5b1f">
+        <circle cx="320" cy="180" r="2.5" />
+        <circle cx="620" cy="120" r="2.5" />
+        <circle cx="400" cy="320" r="2.5" />
+        <circle cx="260" cy="360" r="2.5" />
+        <circle cx="660" cy="330" r="2.5" />
+      </g>
+    </svg>
   );
 }
 
 export default function Hero() {
   return (
-    <section className="relative pt-16 md:pt-20 overflow-hidden" aria-labelledby="hero-title">
-      <span
-        className="absolute -top-24 -right-10 font-display italic text-[22rem] leading-none text-[#1a1a18]/[0.045] select-none hidden lg:block pointer-events-none"
-        aria-hidden="true"
-      >
-        H
-      </span>
+    <section className="relative pt-14 overflow-hidden" aria-labelledby="hero-title">
+      <div className="grid-bg absolute inset-0 pointer-events-none" aria-hidden="true" />
+      <CircuitTrace />
 
-      <div className="relative max-w-6xl mx-auto px-4">
-        <div className="pt-10 pb-4">
-          <Masthead />
-        </div>
+      <div className="relative max-w-6xl mx-auto px-4 pt-16 md:pt-24 pb-20 md:pb-32">
+        <motion.p {...fade(0.05)} className="flex items-center gap-2.5 font-mono text-xs text-soft mb-8">
+          <span className="relative flex w-2 h-2" aria-hidden="true">
+            <span className="absolute inset-0 rounded-full bg-signal opacity-60 motion-safe:animate-ping" />
+            <span className="relative w-2 h-2 rounded-full bg-signal" />
+          </span>
+          Disponible para proyectos · {site.location}
+        </motion.p>
 
-        <div className="grid lg:grid-cols-12 gap-12 py-12 md:py-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-end">
           <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex items-center gap-3 mb-8"
-            >
-              <span className="relative flex w-2 h-2" role="status" aria-label="Disponible para proyectos">
-                <span className="absolute inline-flex w-full h-full rounded-full bg-[#e03c31] opacity-60 animate-ping" aria-hidden="true" />
-                <span className="relative inline-flex w-2 h-2 rounded-full bg-[#e03c31]" aria-hidden="true" />
-              </span>
-              <span className="eyebrow text-[#1a1a18]">Disponible para nuevos proyectos — Q3 2026</span>
-            </motion.div>
-
             <motion.h1
               id="hero-title"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="font-display font-medium tracking-tight text-[15vw] leading-[0.98] sm:text-7xl md:text-[5.2rem] mb-8"
+              {...fade(0.12)}
+              className="text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
             >
-              Código con{' '}
-              <em className="italic font-normal text-[#2e3bff]">propósito</em>
-              <sup className="font-mono text-base align-super ml-1" aria-hidden="true">*</sup>
+              Software que se queda
+              <br />
+              en <span className="text-signal">producción</span>
+              <span className="caret ml-1" aria-hidden="true" />
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-lg text-[#6f6e67] max-w-xl mb-10 leading-relaxed"
-            >
-              Construyo <strong className="font-semibold text-[#1a1a18]">SaaS, agentes de IA y plataformas empresariales</strong> donde
-              el diseño editorial y la arquitectura de software trabajan en el mismo equipo.
+            <motion.p {...fade(0.22)} className="mt-8 max-w-xl text-lg text-soft leading-relaxed">
+              Soy Héctor, ingeniero de sistemas y desarrollador full stack. Diseño, programo y opero mis
+              propios SaaS —y construyo los tuyos— con el mismo cuidado: agendas médicas, gestión de
+              negocios, agentes de IA y plataformas a medida.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12"
-            >
-              <a href="#portfolio" className="btn-editorial btn-editorial-accent">
-                Ver portafolio
-                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            <motion.div {...fade(0.3)} className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <a href="#work" className="btn-editorial btn-editorial-accent">
+                Ver lo que he construido
+                <ArrowDownRight className="w-4 h-4" aria-hidden="true" />
               </a>
               <a href="#contact" className="btn-editorial-text">
-                Escríbeme
+                Cuéntame tu proyecto
                 <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </a>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="grid grid-cols-3 divide-x divide-[#1a1a18]/15 border-y border-[#1a1a18]/15 max-w-lg"
-            >
-              {[
-                ['+5', 'años de experiencia'],
-                ['3', 'SaaS en producción'],
-                ['LATAM', 'clientes en 3 regiones'],
-              ].map(([value, label]) => (
-                <div key={label} className="px-4 py-4">
-                  <p className="font-display text-3xl text-[#2e3bff] leading-none">{value}</p>
-                  <p className="eyebrow text-[10px] text-[#6f6e67] mt-2">{label}</p>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="lg:col-span-5 lg:pl-8"
-          >
-            <div className="animate-float-up">
-              <FeaturedCard />
+          <motion.aside {...fade(0.28)} className="lg:col-span-5" aria-label="Productos en producción">
+            <div className="rounded-lg border border-ink/15 bg-panel overflow-hidden shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
+              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-ink/10 font-mono text-[11px] text-soft">
+                <span className="flex gap-1.5" aria-hidden="true">
+                  <i className="w-2.5 h-2.5 rounded-full bg-ink/15" />
+                  <i className="w-2.5 h-2.5 rounded-full bg-ink/15" />
+                  <i className="w-2.5 h-2.5 rounded-full bg-ink/15" />
+                </span>
+                <span className="ml-2">en producción</span>
+              </div>
+              <ul>
+                {live.map((p) => (
+                  <li key={p.name} className="border-b border-ink/10 last:border-0">
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between gap-4 px-4 py-4 hover:bg-ink/[0.04] transition-colors focus:outline-none focus-visible:bg-ink/[0.06]"
+                      aria-label={`${p.name}: ${p.kind} (se abre en nueva pestaña)`}
+                    >
+                      <span className="min-w-0">
+                        <span className="flex items-center gap-2.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" aria-hidden="true" />
+                          <span className="text-lg font-medium tracking-tight">{p.name}</span>
+                        </span>
+                        <span className="block font-mono text-[11px] text-soft mt-1 truncate">{p.host}</span>
+                      </span>
+                      <ArrowUpRight
+                        className="w-4 h-4 shrink-0 text-soft group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="font-display italic text-lg text-[#6f6e67] mt-8 leading-snug">
-              «El diseño no es solo cómo se ve. Es cómo funciona el software desde adentro.»
-            </p>
-          </motion.div>
+          </motion.aside>
         </div>
-
-        <p className="font-mono text-[11px] text-[#6f6e67] pb-10">
-          * Diseñado en Colombia, probado en producción.
-        </p>
       </div>
     </section>
   );

@@ -3,7 +3,8 @@
  * Cualquier cambio de contacto debe hacerse aquí.
  */
 export const site = {
-  name: 'Héctor Castillo',
+  name: 'Héctor Rafael Castillo Pérez',
+  brand: 'Héctor Castillo',
   role: 'Ingeniero de Sistemas · Full Stack Developer',
   city: 'Barranquilla',
   country: 'Colombia',
