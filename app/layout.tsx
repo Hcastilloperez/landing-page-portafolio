@@ -11,6 +11,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hectorcastillo.net'),
+  verification: {
+    other: { 'facebook-domain-verification': '1q4x43l3a5dbuo2rmz1ydiqzy9lhib' },
+  },
   title: {
     default: 'Héctor Castillo | Full Stack Developer & Software Engineer',
     template: '%s | Héctor Castillo',
